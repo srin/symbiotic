@@ -47,10 +47,10 @@
  <div class="fixed">
   
   <dl class="sub-nav">
-  <dd class="active"><a href="#">Most Recent</a></dd>
-  <dd><a href="#">Most Popular</a></dd>
-  <dd><a href="#">Unanswered</a></dd>
-  <dd><a href="#">Top Contributors</a></dd>
+  <dd> <%= link_to "Most Recent", recent_posts_path %> </dd>
+  <dd> <%= link_to "Most Popular", popular_posts_path %></dd>
+  <dd> <%= link_to "Unanswered", unanswered_posts_path %></dd>
+  
   <div class="button-askquestion">
   <dd> <%= link_to "Ask a Question", new_post_path, class: "uk-button in-line right"  %>
   </div>
