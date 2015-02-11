@@ -1,33 +1,28 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Symbiotic</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
 
-<body>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
 
-			<li><%= link_to 'Account', edit_user_registration_path %></li>
-			<li><%= link_to 'Sign up', new_user_registration_path %></li>
-			<li><%= link_to 'Sign in', new_user_session_path %></li>
-            <li> <%= link_to "Logout", destroy_user_session_path, method: :delete %> </li>
-            <li> <%= link_to "Account settings", edit_user_registration_path %> </li>
+  <header>
+  	<%= render 'layouts/header' %>
 
-            <li role="presentation"><%= link_to "Corporate", posts_path(category: 'Corporate / company law') %></li> 
-      <li role="presentation"><%= link_to "Intellectual Property", posts_path(category: 'Intellectual Property') %></li> 
-      <li role="presentation"><%= link_to "Employment", posts_path(category: 'Employment') %></li>
-      <li role="presentation"><%= link_to "Commercial", posts_path(category: 'Commercial') %></li>
-      <li role="presentation"><%= link_to "Real Estate", posts_path(category: 'Real Estate') %></li>
-      <li role="presentation"><%= link_to "Venture Capital", posts_path(category: 'Venture Capital') %></li>
-      <li role="presentation"><%= link_to "Show all", root_path %> </li>
+    <%= render 'layouts/sidebar' %>
+  </header>
 
+  <body>
+    <% flash.each do |name, msg| %>
+      <%= content_tag(:div, msg, class: "alert-box") %>
+    <% end %>
 
-    <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
-<%= yield %>
-
-</body>
+    <%= yield %>
+    <%= javascript_include_tag "application" %>
+  </body>
 </html>

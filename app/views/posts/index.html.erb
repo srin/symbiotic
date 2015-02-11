@@ -1,25 +1,38 @@
-<p id="notice"><%= notice %></p>
+<div class="content">
+<% @posts.each do |post| %>
+<div class="row question">
 
-      
-      <%= link_to "Recent", recent_posts_path %>
-      <%= link_to "Popular", popular_posts_path %>
-
-    <% @posts.each_with_index do |post, index| %>
-      
-        <p><%= index + 1 %>. Question: <%= post.title %> - created at: <%= post.created_at.to_formatted_s(:long) %></p>
-        <p>Description: <%= post.description %> </p>
-        <p>Numbers of answers: <%= post.comments_count %></p>
-        <p>Category: <%= post.category.name %> </p>
-        <p><%= link_to "View #{post.comments_count} answers".html_safe, post %> </p>
-        <p><%= link_to "Add an answer", post %> </p>
+      <div class="large-3 small-12 columns small-3">
+        <ul class="inline-list">
+          <li><%= post.comments_count %></li><br>
+          <li><%= link_to "Answers", post %></a></li>
+          
+        </ul>
+      </div>
+      <div class="large-8 small-12 columns">
+        <p><%= post.title %></p>
         
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-   
-    <% end %>
-  </tbody>
-</table>
+        <ul class="inline-list">
+          <li>Asked on <%= post.created_at.to_formatted_s(:long) %></li>
+          <li>Category: <%= post.category.name %></li>
+        </ul>
 
-<br>
+        </div>
 
-<%= link_to 'New Post', new_post_path %>
+           <div class="large-1 small-12 columns">
+
+              <%= link_to "Answer", post, class: "uk-button in-line right" %>
+           </div>
+
+    </div>
+
+    <%end%>
+</div>
+      
+        
+        
+        
+      
+    
+
+  

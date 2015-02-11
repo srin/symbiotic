@@ -1,36 +1,53 @@
-<p id="notice"><%= notice %></p>
+<div class="content">
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+<div class="row question">
+    
+      
+      <div class="large-8 small-12 columns">
+        <p><strong><%= @post.title %></strong></p>
+        <p><%= @post.description %> </p>
+        
+        <ul class="inline-list">
+          <li>Asked on <%= @post.created_at.to_formatted_s(:long) %></li>
+          <li>Category: <%= @post.category.name %></li>
+        </ul>
 
-<p>
-  <strong>Description:</strong>
-  <%= @post.description %>
-</p>
+        </div>
 
-      <% @post.comments.each_with_index do |comment, index| %>
+    </div>
+</div>
+
+<div class="content">
+  <h2>Answers</h2>
+  <% @post.comments.each do |comment| %>
+  <div class="row question">
+
+     <div class="large-8 small-12 columns">
+            <p><%= simple_format comment.body %> </p>
+          
+            <p> 
               
-                  <p><%= index + 1 %>. <%= comment.user.name %> | User score: <%= comment.user.karma %> | No of answers: <%= comment.user.comments_count %> | Posted at <%= comment.created_at.to_formatted_s(:long) %> </p>
-                  <p><%= simple_format comment.body %> </p>
+          <%= comment.user.name %> | User score: <%= comment.user.karma %> | No of answers: <%= comment.user.comments_count %> | Posted at <%= comment.created_at.to_formatted_s(:long) %>
+              
+            </p>
 
-
-              </div>
-
-          <p> <%= link_to "upvote", like_post_comment_path(@post, comment), method: :put %> | <%= link_to "downvote", dislike_post_comment_path(@post, comment), method: :put %> <br>
+        <p> <%= link_to "upvote", like_post_comment_path(@post, comment), method: :put %> | <%= link_to "downvote", dislike_post_comment_path(@post, comment), method: :put %> <br>
                 Comment score: <%= comment.get_upvotes.size - comment.get_downvotes.size %> </p>
-         <%end%>
 
+        </div>
+  </div>
+  <%end%>
+</div>
+
+<div class="row question">
 
 <%= simple_form_for [@post, Comment.new]  do |f| %>
 	<h3>Share an answer </h3>
 		<div class="field">
-			<%= f.text_area :body, class: "form-control" %>
+			<%= f.text_area :body%>
 		</div>
 		<br>
 			<%= f.submit "Add Comment", class: "button success" %>
 	<%end%>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+</div>
