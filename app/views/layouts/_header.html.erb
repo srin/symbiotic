@@ -21,6 +21,8 @@
 
       <section class="top-bar-section">
 
+
+
        <ul class="right">
         <ul>
           <li class="search">
@@ -34,7 +36,8 @@
           </li>
 
           <ul>
-            <a href="#" class="button [radius round] button-facebook">Sign in / Register</a>
+
+        
           </ul>
 
         </ul>
@@ -50,9 +53,21 @@
   <dd> <%= link_to "Most Recent", recent_posts_path %> </dd>
   <dd> <%= link_to "Most Popular", popular_posts_path %></dd>
   <dd> <%= link_to "Unanswered", unanswered_posts_path %></dd>
+
+
   
   <div class="button-askquestion">
   <dd> <%= link_to "Ask a Question", new_post_path, class: "uk-button in-line right"  %>
   </div>
+
+  <% if user_signed_in? %>
+              <%= link_to "Logout", destroy_user_session_path, method: :delete%>
+              <%= link_to "Account", edit_user_registration_path %>
+
+              <%else%>
+
+            <%= link_to "Login", new_user_session_path %>
+            <%= link_to "Sign up", new_user_registration_path%>
+              <%end%>
 </dl>
  </div>
