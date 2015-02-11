@@ -5,7 +5,7 @@
       <ul class="title-area">
         <li class="name">
           <h1>
-            <a href="#">
+            <a href="/">
               Symbiotic
             </a>
           </h1>
@@ -59,7 +59,7 @@
   <div class="button-askquestion">
   <dd> <%= link_to "Ask a Question", new_post_path, class: "uk-button in-line right"  %>
   </div>
-
+              <%= link_to "Home", root_path %>
   <% if user_signed_in? %>
               <%= link_to "Logout", destroy_user_session_path, method: :delete%>
               <%= link_to "Account", edit_user_registration_path %>
