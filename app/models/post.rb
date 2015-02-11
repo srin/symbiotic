@@ -1,0 +1,9 @@
+class Post < ActiveRecord::Base
+	has_many :comments, dependent: :destroy
+	belongs_to :user, :counter_cache => true
+	belongs_to :category, :counter_cache => true
+
+	scope :recent, 		->{ order("created_at DESC")}
+	scope :popular, 	-> { order("comments_count DESC")}
+	scope :unanswered, 	-> {where(comments_count: 0)}
+end

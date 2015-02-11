@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+      
+      <%= link_to "Recent", recent_posts_path %>
+      <%= link_to "Popular", popular_posts_path %>
+
+    <% @posts.each_with_index do |post, index| %>
+      
+        <p><%= index + 1 %>. Question: <%= post.title %> - created at: <%= post.created_at.to_formatted_s(:long) %></p>
+        <p>Description: <%= post.description %> </p>
+        <p>Numbers of answers: <%= post.comments_count %></p>
+        <p>Category: <%= post.category.name %> </p>
+        <p><%= link_to "View #{post.comments_count} answers".html_safe, post %> </p>
+        <p><%= link_to "Add an answer", post %> </p>
+        
+        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+   
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Post', new_post_path %>
