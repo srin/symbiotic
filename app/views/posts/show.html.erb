@@ -1,53 +1,64 @@
-<div class="content">
+  <div class="row qnaquestionbox">
 
-<div class="row question">
-    
-      
-      <div class="large-8 small-12 columns">
-        <p><strong><%= @post.title %></strong></p>
-        <p><%= @post.description %> </p>
-        
-        <ul class="inline-list">
-          <li>Asked on <%= @post.created_at.to_formatted_s(:long) %></li>
-          <li>Category: <%= @post.category.name %></li>
-        </ul>
+  <div class="large-12 small-12 columns qnaquestion">
+    <p><%= @post.title %></p>
 
-        </div>
+ <div class="large-12 small-12 columns description">
+    <p><%= @post.description %> </p>
 
-    </div>
-</div>
-
-<div class="content">
-  <h2>Answers</h2>
-  <% @post.comments.each do |comment| %>
-  <div class="row question">
-
-     <div class="large-8 small-12 columns">
-            <p><%= simple_format comment.body %> </p>
-          
-            <p> 
-              
-          <%= comment.user.name %> | User score: <%= comment.user.karma %> | No of answers: <%= comment.user.comments_count %> | Posted at <%= comment.created_at.to_formatted_s(:long) %>
-              
-            </p>
-
-        <p> <%= link_to "upvote", like_post_comment_path(@post, comment), method: :put %> | <%= link_to "downvote", dislike_post_comment_path(@post, comment), method: :put %> <br>
-                Comment score: <%= comment.get_upvotes.size - comment.get_downvotes.size %> </p>
-
-        </div>
+    <ul class="inline-list qnainfo">
+      <li> <span class="date">Asked on <%= @post.created_at.to_formatted_s(:long) %></span></li>
+      <li><span class="category">Category: <%= @post.category.name %></span></li>
+      <li><%= link_to "Answer", @post, class: "uk-button in-line right answer-button" %></li>
+      </ul>
   </div>
-  <%end%>
 </div>
+
+</div>
+<% @post.comments.each do |comment| %>
+<div class="row answertitle">
+<h5><%=@post.comments_count%>Answers</h5>
+</div>
+
+  <div class="row answerbox">
+    <div class="large-1 small-12 columns votesection">
+
+       <ul class="vote">
+        <li><%= link_to "upvote", like_post_comment_path(@post, comment), method: :put, class: "uk-button vote" %></li>
+      </ul>
+
+      <ul class="vote">
+        <li>Comment score: <%= comment.get_upvotes.size - comment.get_downvotes.size %></li>
+      </ul>
+
+      <ul class="vote">
+        <li><%= link_to "downvote", dislike_post_comment_path(@post, comment), method: :put, class: "uk-button vote" %></li>
+      </ul>
+
+  </div>
+
+  </div>
+  <div class="large-11 small-12 columns question">
+    <p><%= simple_format comment.body %> </p>
+
+    <ul class="inline-list info">
+      <li> <span>Answered <%= comment.created_at.to_formatted_s(:long) %></span></li>
+      <li> <%= comment.user.name %> from <% comment.user.company %> <span> <%= comment.get_upvotes.size - comment.get_downvotes.size %> </span></li>
+    </ul>
+  </div>
+</div>
+
+  <%end%>
 
 <div class="row question">
 
 <%= simple_form_for [@post, Comment.new]  do |f| %>
-	<h3>Share an answer </h3>
-		<div class="field">
-			<%= f.text_area :body%>
-		</div>
-		<br>
-			<%= f.submit "Add Comment", class: "button success" %>
-	<%end%>
+  <h3>Share an answer </h3>
+    <div class="field">
+      <%= f.text_area :body%>
+    </div>
+    <br>
+      <%= f.submit "Add Comment", class: "button success" %>
+  <%end%>
 
 </div>

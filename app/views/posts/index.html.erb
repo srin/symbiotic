@@ -1,36 +1,45 @@
-<div class="content">
-<% @posts.each do |post| %>
-<div class="row question">
+<% @posts.each do |post| %>      
+  <div class="row questionbox">
 
-      <div class="large-3 small-12 columns small-3">
-        <ul class="inline-list">
-          <li><%= post.comments_count %></li><br>
-          <li><%= link_to "Answers", post %></a></li>
-          
+    <div class="large-2 small-12 columns">
+      <div class="large-6 small-6 columns">
+
+        <ul class="answersnumber">
+          <li><%= post.comments_count %></li>
         </ul>
+
+        <ul class="answerslabel">
+          <li><a href="" class="answerslabel">Answers</a></li>
+        </ul>
+
       </div>
-      <div class="large-8 small-12 columns">
-        <p><%= post.title %></p>
-        
-        <ul class="inline-list">
-          <li>Asked on <%= post.created_at.to_formatted_s(:long) %></li>
-          <li>Category: <%= post.category.name %></li>
-        </ul>
+      <div class="large-6 small-6 columns upvotes">
 
-        </div>
+       <ul class="upvotesnumber">
+        <li><a href="" class="upvotesnumber">8</a></li>
+      </ul>
 
-           <div class="large-1 small-12 columns">
-
-              <%= link_to "Answer", post, class: "uk-button in-line right" %>
-           </div>
+      <ul class="upvoteslabel">
+        <li><a href="" class="upvotesnumber">Upvotes</a></li>
+      </ul>
 
     </div>
+  </div>
+  <div class="large-9 small-12 columns question">
+    <p><%= post.title %></p>
 
-    <%end%>
+    <ul class="inline-list info">
+      <li> <span class="date">Asked <%= post.created_at.to_formatted_s(:long) %> </span></li>
+      <li><span class="category"><%= post.category.name %></span></li>
+    </ul>
+  </div>
+
+  <div class="large-1 small-12 columns">
+    <%= link_to "Answer", post, class: "uk-button in-line right answer-button" %>
+  </div>
 </div>
-      
         
-        
+  <%end%>      
         
       
     
