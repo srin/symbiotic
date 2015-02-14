@@ -15,42 +15,45 @@
 </div>
 
 </div>
-<% @post.comments.each do |comment| %>
-<div class="row answertitle">
-<h5><%=@post.comments_count%>Answers</h5>
-</div>
 
-  <div class="row answerbox">
-    <div class="large-1 small-12 columns votesection">
+<div class="row answertitle">
+    <div class="large-12 small-12 columns ">
+      <h5><%=@post.comments_count%> Answers</h5></div>
+    </div>
+
+<% @post.comments.each do |comment| %>
+    <div class="row answerbox">
+      <div class="large-1 small-12 columns votesection">
 
        <ul class="vote">
-        <li><%= link_to "upvote", like_post_comment_path(@post, comment), method: :put, class: "uk-button vote" %></li>
+        <li><%= link_to "^", like_post_comment_path(@post, comment), method: :put, class: "uk-button vote" %> </li>
+      </ul>
+      
+      <ul class="vote">
+        <li> <%= comment.get_upvotes.size - comment.get_downvotes.size %></li>
+
       </ul>
 
       <ul class="vote">
-        <li>Comment score: <%= comment.get_upvotes.size - comment.get_downvotes.size %></li>
+        <li><%= link_to "v", dislike_post_comment_path(@post, comment), class: "uk-button vote" %></li>
       </ul>
 
-      <ul class="vote">
-        <li><%= link_to "downvote", dislike_post_comment_path(@post, comment), method: :put, class: "uk-button vote" %></li>
+    </div>
+    <div class="large-11 small-12 columns question">
+      <p><%= simple_format comment.body %> </p>
+
+      <ul class="inline-list info">
+        <li> <span class="date">Answered on <%= comment.created_at.to_formatted_s(:long) %></span></li>
+        <li><a class="firstlastname"><%= comment.user.name %> from <% comment.user.company %><span class="userscore">Comment score: <%= comment.get_upvotes.size - comment.get_downvotes.size %></span> </a></li>
       </ul>
-
+    </div>
   </div>
+<%end%>
 
-  </div>
-  <div class="large-11 small-12 columns question">
-    <p><%= simple_format comment.body %> </p>
 
-    <ul class="inline-list info">
-      <li> <span>Answered <%= comment.created_at.to_formatted_s(:long) %></span></li>
-      <li> <%= comment.user.name %> from <% comment.user.company %> <span> <%= comment.get_upvotes.size - comment.get_downvotes.size %> </span></li>
-    </ul>
-  </div>
-</div>
+<div class="row">
+  <div class="large-9 large-offset-3 columns">
 
-  <%end%>
-
-<div class="row question">
 
 <%= simple_form_for [@post, Comment.new]  do |f| %>
   <h3>Share an answer </h3>
@@ -61,4 +64,5 @@
       <%= f.submit "Add Comment", class: "button success" %>
   <%end%>
 
+</div>
 </div>
