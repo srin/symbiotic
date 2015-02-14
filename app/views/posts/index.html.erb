@@ -1,6 +1,6 @@
 <% @posts.each do |post| %>      
-  <div class="row questionbox">
 
+  <div class="row questionbox">
     <div class="large-2 small-12 columns">
       <div class="large-6 small-6 columns">
 
@@ -9,39 +9,41 @@
         </ul>
 
         <ul class="answerslabel">
-          <li><a href="" class="answerslabel">Answers</a></li>
+          <li><%= link_to "Answers", post, class: "answerslabel" %> </li>
         </ul>
 
       </div>
-      <div class="large-6 small-6 columns upvotes">
+      <div class="large-6 small-6 columns">
 
-       <ul class="upvotesnumber">
-        <li><a href="" class="upvotesnumber">8</a></li>
-      </ul>
+        <ul class="answersnumber">
+          <li>[  ]</li>
+        </ul>
 
-      <ul class="upvoteslabel">
-        <li><a href="" class="upvotesnumber">Upvotes</a></li>
-      </ul>
+        <ul class="answerslabel">
+          <li><%= link_to "Upvotes", post, class: "answerslabel" %> </li>
+        </ul>
 
-    </div>
+      </div>
   </div>
-  <div class="large-9 small-12 columns question">
-    <p><%= post.title %></p>
+  
 
+  <div class="large-9 small-12 columns question">
+  <%= link_to post do %>
+    <p><%= post.title %></p>
+  <%end%>
     <ul class="inline-list info">
       <li> <span class="date">Asked <%= post.created_at.to_formatted_s(:long) %> </span></li>
       <li><span class="category"><%= post.category.name %></span></li>
     </ul>
   </div>
 
-  <div class="large-1 small-12 columns">
-    <%= link_to "Answer", post, class: "uk-button in-line right answer-button" %>
+  <%= link_to post do %>
+  <div class="large-1 small-12 columns  answer-button">
+    <a class="uk-button in-line right">Answer</a>
   </div>
+  <%end%>
 </div>
-        
-  <%end%>      
-        
-      
-    
+
+<%end%>
 
   

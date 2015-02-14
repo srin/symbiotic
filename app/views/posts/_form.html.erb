@@ -1,11 +1,8 @@
-<div class="row">
-  <div class="large-9 large-offset-3 columns">
-
 
 <%= form_for(@post) do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <h2><%= pluralize(@post.errors.count, "error") %> prevent this question from being posted. Please take a look at these errors and try again.</h2>
 
       <ul>
       <% @post.errors.full_messages.each do |message| %>
@@ -15,22 +12,38 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title, "Question" %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description, "Please enter any useful background info to the question" %><br>
-    <%= f.text_area :description %>
+
+  <form>
+   
+    <div class="row askquestionform">
+      <div class="large-12 small-12 columns questioninput">
+
+    <%= f.label :title, "1. Your question" %><br>
+    <%= f.text_field :title, :placeholder => "Ask here..."%>
+      </div>
+    </div>
+
+    <div class="row askquestionform">
+      <div class="large-12 small-12 columns descriptioninput">
+        <%= f.label :description, "2. Please enter any useful background info to the question" %><br>
+        <%= f.text_area :description, :placeholder => "Specific facts, information that would help provide an answer" %>
+      </div>
+    </div>
+
+    <div class="row askquestionform">
+      <div class="large-12 small-12 columns">
+      <%= f.label :category, "3. Please choose which category your question relates to"%> <br>
+      <%= f.collection_select :category_id, Category.all, :id, :name %> <br>
+      </div>
+    </div>
+  
+  <div class="button-postquestion">
+    <div class="actions">
+      <%= f.submit "Post question", class: "button" %> 
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :category, "Please choose which category your question relates to?"%> <br>
-      <%= f.collection_select :category_id, Category.all, :id, :name %> <br>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  
 <% end %>
 </div>
 </div>
