@@ -18,11 +18,17 @@
   </header>
 
   <body>
+
+
     <% flash.each do |name, msg| %>
       <%= content_tag(:div, msg, class: "alert-box") %>
     <% end %>
-
+    
+    <div class="content">
     <%= yield %>
+    </div>
+
+
     <%= javascript_include_tag "application" %>
   </body>
 </html>
