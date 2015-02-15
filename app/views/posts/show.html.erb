@@ -58,8 +58,15 @@
 
       <ul class="inline-list info">
         <li> <span class="date">Answered on <%= comment.created_at.to_formatted_s(:long) %></span></li>
-        <li><span class="firstlastname"><%= comment.user.name %> from <% comment.user.company %> | Comment score: <%= comment.get_upvotes.size - comment.get_downvotes.size %></span></li>
+        <li><span class="firstlastname"><%= comment.user.name %> from <%= comment.user.company %> | Comment score: <%= comment.get_upvotes.size - comment.get_downvotes.size %></span></li>
         <li><span class="firstlastname">User rating: <%= comment.user.karma %> <span></li>
+        <li><span class="firstlastname">
+          <% if comment.user.verified == true %> 
+            <%= "Verified solicitor"%>
+            <%else%>
+            <%= "Pending verification" %>
+            <%end%>
+        <span></li>
       </ul>
     </div>
   </div>

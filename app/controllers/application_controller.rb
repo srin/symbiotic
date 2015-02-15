@@ -20,5 +20,8 @@ protected
    devise_parameter_sanitizer.for(:sign_in) << :verified
    devise_parameter_sanitizer.for(:sign_up) << :verified
    devise_parameter_sanitizer.for(:account_update) << :verified
+   devise_parameter_sanitizer.for(:sign_in) << :is_solicitor
+   devise_parameter_sanitizer.for(:sign_up) << :is_solicitor
+   devise_parameter_sanitizer.for(:account_update) << :is_solicitor
  end
 end

@@ -1,5 +1,4 @@
-<div class="row">
-  <div class="large-9 large-offset-3 columns">
+
 <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -11,7 +10,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :company, "2. What's name of your company / firm / organisation?" %><br />
+    <%= f.label :company, "2. What's the name of your company / firm / organisation?" %><br />
     <%= f.text_field :company %>
   </div>
 
@@ -21,8 +20,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :verified,  "4. Are you a solicitor registered with the Solicitors Regulation Authority? (Check the box if 'yes' and enter your SRA number)" %> <br>
-    <%= f.check_box :verified %> Yes, I'm a solicitor <br> <%= f.label :SRA_number, "SRA Number" %> <%= f.text_field :SRA_number %> <br />
+    <%= f.label :is_solicitor,  "4. Are you a solicitor registered with the Solicitors Regulation Authority? (Check the box if 'yes' and enter your SRA number)" %> <br>
+    <%= f.check_box :is_solicitor %> Yes, I'm a solicitor <br> <%= f.label :SRA_number, "SRA Number" %> <%= f.text_field :SRA_number %> <br />
   </div>  
 
   <div class="field">
@@ -43,10 +42,8 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", class: "button" %>
   </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
-<div>
-</div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150214232311) do
+ActiveRecord::Schema.define(version: 20150215002554) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20150214232311) do
     t.integer  "karma",                  default: 0
     t.integer  "comments_count",         default: 0
     t.integer  "posts_count",            default: 0
+    t.boolean  "is_solicitor",           default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
