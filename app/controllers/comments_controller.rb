@@ -46,6 +46,7 @@ class CommentsController < ApplicationController
       else
       @comment.upvote_by current_user 
       @comment.user.increase_karma
+      @comment.post.increase_tally
       end
       flash[:success] = "You've upvoted"
       redirect_to @post       

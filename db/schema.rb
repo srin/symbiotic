@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211180959) do
+ActiveRecord::Schema.define(version: 20150214232311) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20150211180959) do
     t.integer  "user_id"
     t.integer  "comments_count", default: 0
     t.integer  "category_id"
+    t.integer  "tally",          default: 0
   end
 
   create_table "users", force: :cascade do |t|

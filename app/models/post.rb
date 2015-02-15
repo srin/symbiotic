@@ -6,4 +6,8 @@ class Post < ActiveRecord::Base
 	scope :recent, 		->{ order("created_at DESC")}
 	scope :popular, 	-> { order("comments_count DESC")}
 	scope :unanswered, 	-> {where(comments_count: 0)}
+
+	def increase_tally(count=1)
+    	update_attribute(:tally, tally + count)
+  	end	
 end

@@ -16,7 +16,7 @@
       <div class="large-6 small-6 columns">
 
         <ul class="answersnumber">
-          <li>[  ]</li>
+          <li><%= post.tally %></li>
         </ul>
 
         <ul class="answerslabel">
@@ -37,11 +37,11 @@
     </ul>
   </div>
 
-  <%= link_to post do %>
+  
   <div class="large-1 small-12 columns  answer-button">
-    <a class="uk-button in-line right">Answer</a>
+    <%= link_to "Answer", post, class: "uk-button in-line right" %> 
   </div>
-  <%end%>
+  
 </div>
 
 <%end%>

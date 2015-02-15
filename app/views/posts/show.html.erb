@@ -65,21 +65,17 @@
   </div>
 <%end%>
 
-<div class="row askquestiontitle">
-    <div class="large-12 small-12 columns ">
 
 <%= simple_form_for [@post, Comment.new]  do |f| %>
   <h3>Share an answer </h3>
-</div>
-</div>
     <div class="row askquestionform">
       <div class="large-12 small-12 columns questioninput">
-        <%= f.text_area :body%>
-      </div>
+      <%= f.text_area :body%>
+    </div>
     </div>
     <br>
       <%= f.submit "Add Comment", class: "button success" %>
-    <%end%>  
-  </div>
+  <%end%>
 
-
+</div>
+</div>
