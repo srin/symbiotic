@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'paperclip', '~> 4.2.1'
+gem 'aws-s3', '~> 0.6.3'
 
 group :development, :test do
      gem 'sqlite3'
