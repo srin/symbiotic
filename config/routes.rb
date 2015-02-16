@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'profiles/myprofile'
+
+  get 'profiles/lawyerprofile'
+
   devise_for :users
   resources :posts do
     collection do

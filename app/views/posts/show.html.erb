@@ -49,7 +49,7 @@
       </ul>
 
       <ul class="vote">
-        <li><%= link_to "v", dislike_post_comment_path(@post, comment), class: "uk-button vote" %></li>
+        <li><%= link_to "v", dislike_post_comment_path(@post, comment), method: :put, class: "uk-button vote" %></li>
       </ul>
 
     </div>
