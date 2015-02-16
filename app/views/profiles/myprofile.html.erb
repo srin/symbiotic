@@ -1,2 +1,9 @@
-<h1>Profiles#myprofile</h1>
-<p>Find me in app/views/profiles/myprofile.html.erb</p>
+<% if current_user.is_solicitor == true %>
+
+<%= render 'profiles/myprofile_is_lawyer' %>
+
+<%else%>
+
+<%= render 'profiles/myprofile_not_a_lawyer'%>
+
+<%end%>

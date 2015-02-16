@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150215002554) do
+ActiveRecord::Schema.define(version: 20150216163512) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -60,6 +60,10 @@ ActiveRecord::Schema.define(version: 20150215002554) do
     t.integer  "comments_count",         default: 0
     t.integer  "posts_count",            default: 0
     t.boolean  "is_solicitor",           default: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

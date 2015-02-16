@@ -1,7 +1,18 @@
 Rails.application.routes.draw do
-  get 'profiles/myprofile'
+  
+  get 'profiles/myprofile' do
+    collection do
+      get :recent
+      get :popular
+    end
+  end
 
-  get 'profiles/lawyerprofile'
+  get 'profiles/lawyerprofile' do
+    collection do
+      get :recent
+      get :popular
+    end
+  end
 
   devise_for :users
   resources :posts do

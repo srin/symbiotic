@@ -1,0 +1,86 @@
+
+  <div class="row">
+
+    <div class="large-2 panel columns profile">
+
+        <% if @user.image.exists? %>
+          <img><%= image_tag @user.image.url(:medium)%></img>
+        <%else%>
+          <img><%= image_tag "missing.png"%></img>     
+        <%end%>
+
+      <ul class="profilename large-centered">
+        <li><p href="" class="firstname"><%= @user.name %></p></li>
+      </ul>
+
+      <ul class="profilename large-centered">
+        <li><p href="" class="firstname"><%= @user.company %></p></li>
+      </ul>      
+
+      <ul class="profiletext profileanswersnumber large-centered">
+        <li><p href="" class="profileanswersnumber"><%= @user.posts_count %></p></li>
+      </ul>
+
+      <ul class="profiletext profileanswerslabel large-centered">
+        <li><p href="" class="profileanswerslabel">Questions</p></li>
+      </ul>
+
+      <ul class="profiletext profileanswerslabel large-centered">
+        <li><%= link_to "Edit my profile", edit_user_registration_path %></li>
+      </ul>
+
+    </div>
+
+
+    <div class="large-10 columns">
+
+      <div class="row profileanswertitle">
+        <div class="large-6 small-6 columns profileanswerslist">
+          <ul class="inline-list">
+            <li><span class="profileanswertitle">Questions</span></li>
+          </ul>
+        </div>
+
+        <div class="large-6 small-6 columns">
+          <div class="button-profileaskquestion">
+            <%= link_to "Ask a Question", new_post_path, class: "uk-button in-line button-askquestion right"%>
+          </div>
+        </div>
+      </div>
+
+   
+ <% @posts.each do |post| %>
+      <div class="row profileanswerbox">
+     
+        <div class="large-2 small-12 columns profileupvotes">
+         <ul class="upvotesnumber">
+          <li><a href="" class="upvotesnumber"><%= post.comments_count %></a></li>
+        </ul>
+        <ul class="upvoteslabel">
+          <li><a href="" class="upvoteslabel">Answers</a></li>
+        </ul>
+      </div>
+		
+		<%= link_to post_path(id: post) do %> 
+      <div class="large-10 small-12 columns profileanswer">
+        <p><%= post.title %> </p>
+        <p><%= post.description %> </p>
+       <%end%>
+
+       <ul class="inline-list profileinfo">
+        <li> <span class="date">Asked on: <%= post.created_at.to_formatted_s(:long) %></span></li>
+        <li><span class="category"><%= link_to "#{post.category.name}", posts_path(category: post.category.name) %></span></li>
+        <li><%= link_to "View answers", post_path(id: post), class: "uk-button in-line right" %> </li>
+        
+        <li><%= link_to "Edit", edit_post_path(id: post), class: "uk-button in-line right" %> </li>
+      </ul>
+
+    
+      </div>
+
+      
+
+    </div>
+    
+    </div>
+	<%end%>

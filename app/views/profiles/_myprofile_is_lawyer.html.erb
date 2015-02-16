@@ -37,6 +37,10 @@
         <li><p href="" class="profileanswerslabel">Answers</p></li>
       </ul>
 
+       <ul class="profiletext profileanswerslabel large-centered">
+        <li><%= link_to "Edit my profile", edit_user_registration_path %></li>
+      </ul>
+
     </div>
 
 
@@ -77,9 +81,9 @@
        <ul class="inline-list profileinfo">
         <li> <span class="date">Answered on: <%= comment.created_at.to_formatted_s(:long) %></span></li>
         <li><span class="category"><%= link_to "#{comment.post.category.name}", posts_path(category: comment.post.category.name) %></span></li>
-        <li><%= link_to "View", post_path(id: comment.post), class: "uk-button in-line right" %> </li>
+         <li><%= link_to "View", post_path(id: comment.post), class: "uk-button in-line right" %> </li>
       </ul>
     </div>
-
+    
     </div>
 	<%end%>

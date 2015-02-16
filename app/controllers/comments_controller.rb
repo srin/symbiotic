@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_comments, only: [:destroy]
   before_action :authenticate_user!, except: [:index, :show] 
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
 
 
@@ -72,6 +73,11 @@ class CommentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_comments
       @comment = Comment.find(params[:id])
+    end
+
+    def correct_user
+      @comment = current_user.comments.find_by(id: params[:id])
+      redirect_to posts_path, notice: "Not authorized to edit this post" if @comment.nil?
     end
 
         # Never trust parameters from the scary internet, only allow the white list through.

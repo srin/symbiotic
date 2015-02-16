@@ -19,14 +19,11 @@
     <%= f.email_field :email %>
   </div>
 
-  <div class="field">
-    <%= f.label :is_solicitor,  "4. Are you a solicitor registered with the Solicitors Regulation Authority? (Check the box if 'yes' and enter your SRA number)" %> <br>
-    <%= f.check_box :is_solicitor %> Yes, I'm a solicitor <br> <%= f.label :SRA_number, "SRA Number" %> <%= f.text_field :SRA_number %> <br />
+   <div class="field">
+    <%= f.label :is_solicitor,  "Are you a solicitor registered with the Solicitors Regulation Authority? (Check the box if 'yes')" %> 
+    <%= f.check_box :is_solicitor %> Yes, I'm a solicitor  
   </div>  
-
-  <div class="field">
-    
-  </div>
+  
 
   <div class="field">
     <%= f.label :password %>
