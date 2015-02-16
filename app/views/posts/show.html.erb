@@ -32,7 +32,7 @@
 
 <div class="row answertitle">
     <div class="large-12 small-12 columns ">
-      <h5><%=@post.comments_count%> Answers</h5></div>
+      <h5><%=pluralize(@post.comments_count, "Answer") %> </h5></div>
     </div>
 
 <% @post.comments.each do |comment| %>

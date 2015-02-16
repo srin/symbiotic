@@ -33,11 +33,12 @@
   <%end%>
     <ul class="inline-list info">
       <li> <span class="date">Asked <%= post.created_at.to_formatted_s(:long) %> </span></li>
-      <li><span class="category"><%= post.category.name %></span></li>
+      <li><span class="category"><%= link_to "#{post.category.name}", posts_path(category: post.category.name) %></span></li>
     </ul>
   </div>
 
   
+
   <div class="large-1 small-12 columns  answer-button">
     <%= link_to "Answer", post, class: "uk-button in-line right" %> 
   </div>
