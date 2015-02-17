@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
-  before_action :set_user, only: [:lawyerprofile]
+	before_action :set_user, only: [:lawyerprofile]
+	
 
   def myprofile
 

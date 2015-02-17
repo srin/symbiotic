@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_filter :list_posts
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show, :recent, :popular, :unanswered] 
   before_action :correct_user, only: [:edit, :update, :destroy]
@@ -7,11 +8,11 @@ class PostsController < ApplicationController
   # GET /posts.json
     def index
     if params[:category].blank?
-      @posts = Post.all.order("created_at DESC")
+      @posts = @q.result.includes(:comments).order("created_at DESC")
       @heading = ""
     else
       @category_id = Category.find_by(name: params[:category]).id
-      @posts = Post.where(category_id: @category_id).order("created_at DESC")
+      @posts = @q.result.includes(:comments).where(category_id: @category_id).order("created_at DESC")
       @heading = "- " + Category.find_by(name: params[:category]).name
     end
   end

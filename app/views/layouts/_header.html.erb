@@ -27,11 +27,14 @@
         <ul>
           <li class="search">
             <form>
-              <input type="search" placeholder="Search">
+              <%= search_form_for @q do |f| %>
+               
+                <%= f.search_field :description_or_title_or_comments_body_cont, :placeholder => "Search" %>
             </form>
             
             <li class="has-button">
-              <a class="small button" href="#">Search</a>
+               <%= f.submit class: "small button" %>
+               <%end%>
             </li>
           </li>
 
