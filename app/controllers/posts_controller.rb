@@ -17,12 +17,13 @@ class PostsController < ApplicationController
   end
 
   def recent
-    @posts = Post.recent
+
+    @posts = Post.where(category_id: @category).recent
     render action: :index
   end
 
   def popular
-    @posts = Post.popular
+    @posts = Post.where(category_id: @category).popular
     render action: :index
     
   end
