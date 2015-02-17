@@ -19,9 +19,11 @@ Rails.application.configure do
    :port                 => 587,
    :user_name            => ENV['MANDRILL_USERNAME'],
    :password             => ENV['MANDRILL_PASSWORD'], # SMTP password is any valid API key
-   :domain               => 'warm-cove-2645.herokuapp.com', # your domain to identify your server when  connecting
+   :domain               => 'warm-cove-2645.heroku.com', # your domain to identify your server when  connecting
    :authentication       => 'login' # Mandrill supports 'plain' or 'login'
  }
+
+ config.action_mailer.default_url_options = { :host => 'warm-cove-2645.heroku.com' }
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
   # For large-scale production use, consider using a caching reverse proxy like
