@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  before_filter :list_posts
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show, :recent, :popular, :unanswered] 
   before_action :correct_user, only: [:edit, :update, :destroy]

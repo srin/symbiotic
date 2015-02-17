@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Your question has received an answer!</title>
+</head>
+<body>
+
+<h2>Hey <%= @post.user.name %>! </h2>
+
+<p> Your question has received an answer from <%= @comment.user.name %>
+
+<p> To see the answer, <%= link_to "click here", post_url(@post) %>
+
+<p>Have a great day!</p>
+
+Warm regards<br>
+Symbiotic<br>
+
+</body>
+</html>	
