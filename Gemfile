@@ -12,6 +12,7 @@ gem 'paperclip', '~> 4.2.1'
 gem 'aws-sdk', '~> 1.59.0'
 gem 'ransack', '~> 1.6.3'
 gem 'figaro', '~> 1.1.0'
+gem 'has_scope', '~> 0.6.0'
 
 group :development, :test do
      gem 'sqlite3'
