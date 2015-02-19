@@ -8,6 +8,9 @@ class Post < ActiveRecord::Base
 	scope :unanswered, 	-> {where(comments_count: 0)}
 	scope :category, -> category_id {where(:category_id => category_id)}
 
+	scope :category_and_recent, -> {category.order("created_at DESC")}
+	
+
 	def increase_tally(count=1)
     	update_attribute(:tally, tally + count)
   	end	

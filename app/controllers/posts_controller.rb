@@ -2,33 +2,22 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show, :recent, :popular, :unanswered] 
   before_action :correct_user, only: [:edit, :update, :destroy]
-  has_scope :category 
-  has_scope :recent, :type => :boolean
-  has_scope :popular, :type => :boolean
-  has_scope :unanswered, :type => :boolean
 
   # GET /posts
   # GET /posts.json
-  #   def index
-  #   if params[:category].blank?
-  #     @posts = @q.result.includes(:comments).order("created_at DESC")
-  #     @heading = ""
-  #   else
-  #     @category_id = Category.find_by(name: params[:category]).id
-  #     @posts = @q.result.includes(:comments).where(category_id: @category_id).order("created_at DESC")
-  #     @heading = "- " + Category.find_by(name: params[:category]).name
-  #   end
-  # end
-
-  def index
-    @posts = @q.result.includes(:comments).order("created_at DESC")
-    @posts = apply_scopes(Post).all
-    @scope = current_scopes
-
+    def index
+    if params[:category].blank?
+      @posts = @q.result.includes(:comments).order("created_at DESC")
+      @heading = ""
+    else
+      @category_id = Category.find_by(name: params[:category]).id
+      @posts = @q.result.includes(:comments).where(category_id: @category_id).order("created_at DESC")
+      @heading = "- " + Category.find_by(name: params[:category]).name
+    end
   end
 
   def recent
-
+    
     @posts = Post.recent
     render action: :index
   end
