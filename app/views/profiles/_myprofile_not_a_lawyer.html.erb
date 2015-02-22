@@ -17,8 +17,8 @@
         <li><p href="" class="companynotlawyer"><%= @user.company %></p></li>
       </ul>      
 
-      <ul class="profiletext profileanswersnumber">
-        <li><p href="" class="profileanswersnumber"><%= @user.posts_count %></p></li>
+      <ul class="profiletext profilequestionsnumber">
+        <li><p href="" class="profilequestionsnumber"><%= @user.posts_count %></p></li>
       </ul>
 
       <ul class="profiletext profileanswerslabel">
@@ -47,26 +47,26 @@
       <div class="row profileanswerbox">
      
         <div class="large-2 medium-4 small-12 columns profileupvotes">
-         <ul class="upvotesnumber">
-          <li><a href="" class="upvotesnumber"><%= post.comments_count %></a></li>
+         <ul class="answersnumber">
+          <li><a href=""><%= post.comments_count %></a></li>
         </ul>
         <ul class="upvoteslabel">
-          <li><a href="" class="upvoteslabel">Answers</a></li>
+          <li><a href="">Answers</a></li>
         </ul>
       </div>
     
     <%= link_to post_path(id: post) do %> 
       <div class="large-10 medium-8 small-12 columns profileanswer">
         <p><%= post.title %> </p>
-        <p><%= post.description %> </p>
+        <p class=""><%= post.description %> </p>
        <%end%>
 
        <ul class="inline-list profileinfo">
         <li> <span class="date">Asked on: <%= post.created_at.to_formatted_s(:long) %></span></li>
         <li><span class="category"><%= link_to "#{post.category.name}", posts_path(category: post.category.name) %></span></li>
-        <li><%= link_to "View answers", post_path(id: post), class: "uk-button in-line right" %> </li>
+     
         
-        <li><%= link_to "Edit", edit_post_path(id: post), class: "uk-button in-line right" %> </li>
+        <li><%= link_to "Edit Question", edit_post_path(id: post), class: "uk-button in-line right editbutton" %> </li>
       </ul>
 
     

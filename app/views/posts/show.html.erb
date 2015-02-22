@@ -92,30 +92,27 @@
   <%end%>
 
 
-  <div class="row answerquestionform">
-    <div class="large-12 small-12 columns questioninput">
-      <% if user_signed_in? && current_user.is_solicitor == true %>
-      <%= simple_form_for [@post, Comment.new]  do |f| %>
-
-      <h3>Share an answer </h3>
-
+   <% if user_signed_in? && current_user.is_solicitor == true %>
+<%= simple_form_for [@post, Comment.new]  do |f| %>
+  <h3>Share an answer </h3>
+    <div class="row askquestionform">
+      <div class="large-12 small-12 columns questioninput">
       <%= f.text_area :body%>
+      </div>
     </div>
-     <br/>
-    <%= f.submit "Post Answer", class: "button button-postanswer" %>
-    <%end%>
-
-  </div>
-
-  <%elsif user_signed_in? && current_user.is_solicitor == false%>
-  <br/>
-  <br/>
-
-  <%else%>  
-
-   <br/> <br/> <br/> <br/>
-  <%= link_to "Sign in / Sign up to post an answer", new_user_session_path, class: "button button-signinsignuptopost" %>
+    <br>
+      <%= f.submit "Add Comment", class: "button success" %>
   <%end%>
-</div>
+      
+      <%elsif user_signed_in? && current_user.is_solicitor == false%>
+        <br>
+        <br>
 
+      <%else%>  
+
+      <br>
+      <br>
+      <%= link_to "Sign in / register to post an answer", new_user_session_path, class: "button" %>
+      <%end%>
+</div>
 

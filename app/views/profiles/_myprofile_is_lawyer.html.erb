@@ -60,10 +60,10 @@
      
         <div class="large-2 medium-4 small-12 columns profileupvotes">
          <ul class="upvotesnumber">
-          <li><a href="" class="upvotesnumber"><%= comment.get_likes.size %></a></li>
+          <li><a href="" ><%= comment.get_likes.size %></a></li>
         </ul>
         <ul class="upvoteslabel">
-          <li><a href="" class="upvoteslabel">Upvotes</a></li>
+          <li><a href="">Upvotes</a></li>
         </ul>
       </div>
     
@@ -75,7 +75,7 @@
        <ul class="inline-list profileinfo">
         <li> <span class="date">Answered on: <%= comment.created_at.to_formatted_s(:long) %></span></li>
         <li><span class="category"><%= link_to "#{comment.post.category.name}", posts_path(category: comment.post.category.name) %></span></li>
-         <li><%= link_to "View", post_path(id: comment.post), class: "uk-button in-line right" %> </li>
+        
       </ul>
     </div>
     

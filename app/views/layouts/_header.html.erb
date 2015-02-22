@@ -13,8 +13,15 @@
     <div class="right">
      <ul class="button-group">
 
-      <li class="search searchicon">
-        <form>
+      <li>
+       <p class="icon_search_background"> sfsdf</p>
+      </li>
+      <li class="icon_search">
+        <img><%= image_tag "icon_search.png", class: "icon_search"%></img> 
+      </li>
+
+      <li class="search">
+        <form> 
           <%= search_form_for @q do |f| %>
           <%= f.search_field :description_or_title_or_comments_body_cont, :placeholder => "Search" %>
         </form>
