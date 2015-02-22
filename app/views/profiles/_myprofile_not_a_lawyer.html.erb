@@ -4,9 +4,9 @@
     <div class="large-2 medium-3 small-12 panel columns">
 
         <% if @user.image.exists? %>
-          <img><%= image_tag @user.image.url(:medium), class: "profileimage"%></img>
+          <%= image_tag @user.image.url(:medium), class: "profileimage"%>
         <%else%>
-          <img><%= image_tag "missing.png", class: "profileimage"%></img>     
+          <%= image_tag "missing.png", class: "profileimage"%>     
         <%end%>
 
       <ul class="profilename">
