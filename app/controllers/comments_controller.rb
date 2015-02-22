@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
       if @comment.save
         format.html { redirect_to @post, notice: 'Comment was successfully created.' }
         format.json { render json: @comment, status: :created, location: @comment }
-        AnswerMailer.answer_confirm(@post, @comment).deliver_now
+        # AnswerMailer.answer_confirm(@post, @comment).deliver_now  
 
       else
         format.html { render action: "new" }

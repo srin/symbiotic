@@ -1,46 +1,40 @@
 
-<h2>Sign up</h2>
+<div class="signupcontainer large-offset-2">
+  <h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
   <div class="field">
-    <%= f.label :name, "1. What's your name?" %><br />
-    <%= f.text_field :name, autofocus: true %>
+    <%= f.text_field :name, autofocus: true, :placeholder => "Full Name"%>
   </div>
 
   <div class="field">
-    <%= f.label :company, "2. What's the name of your company / firm / organisation?" %><br />
-    <%= f.text_field :company %>
+    <%= f.text_field :company, :placeholder => "Company / Firm / Organisation"  %>
   </div>
 
   <div class="field">
-    <%= f.label :email, "3. What's your email address? (if you're a lawyer, please use your work / professional email address to enable quicker verification)" %><br />
-    <%= f.email_field :email %>
+    <%= f.email_field :email, :placeholder => "Email"%>
+    <p class="emailnote"> ** lawyers, please use your work / professional email address to enable quicker verification! 
   </div>
 
-   <div class="field">
-    <%= f.label :is_solicitor,  "Are you a solicitor registered with the Solicitors Regulation Authority? (Check the box if 'yes')" %> 
-    <%= f.check_box :is_solicitor %> Yes, I'm a solicitor  
+  <div class="field solicitor">
+    <%= f.check_box :is_solicitor %>   Yes, I'm a solicitor registered with the Solicitors Regulation Authority.  
   </div>  
   
 
   <div class="field">
-    <%= f.label :password %>
-    <% if @validatable %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off", :placeholder => "Password (8 characters minimum)" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", :placeholder => "Re-type Password" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up", class: "button" %>
+    <%= f.submit "Sign up", class: "button signupbutton" %>
   </div>
-<% end %>
+  <% end %>
 
-<%= render "devise/shared/links" %>
+  <%= render "devise/shared/links" %>
+</div>

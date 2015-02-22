@@ -1,103 +1,121 @@
 
- <div class="row qnaquestionbox">
+<div class="row qnaquestionbox">
 
-    <div class="large-12 small-12 columns qnaquestion">
-      <p><strong><%= @post.title %></strong></p>
+  <div class="large-12 medium-12 small-12 columns qnaquestion">
+    <p><strong><%= @post.title %></strong></p>
+  </div>
 
-      <div class="large-12 small-12 columns description">
-        <p><%= @post.description %> </p>
-
-        <div class="row">
-          <div class="large-9 small-12 columns">
-            <ul class="inline-list qnainfo">
-              <li> <span class="date">Asked <%= @post.created_at.to_formatted_s(:long) %></span></li>
-              
-              <li><span class="category"><%= @post.category.name %></span></li>
-            </ul>
-          </div>
-          <%= link_to @post do %>
-          <div class="large-2 small-12 columns qnaanswer-button">
-            <ul class="inline-list qnainfo">
-              <li>Answer</li>
-
-            </ul>
-          </div>
-          <%end%>
-        </div>
-      </div>
-    </div>
-
+  <div class="large-12 medium-12 small-12 columns description">
+    <p><%= @post.description %> </p>
   </div>
 
 
+
+  <% if user_signed_in? && current_user.is_solicitor == true %>
+
+  <div class="large-6 medium-8 small-12 columns left">
+    <ul class="inline-list qnainfo left">
+      <li> <span class="date">Asked <%= @post.created_at.to_formatted_s(:long) %></span></li>
+      <li><span class="category"><%= link_to "#{@post.category.name}", posts_path(category: @post.category.name) %></span></li>
+    </ul>
+  </div>
+
+  <%= link_to @post do %>
+  <div class="large-3 medium-4 small-12 columns button qnaanswer-button right">
+    <a>Answer</a>
+  </div>
+  <%end%>
+
+  <%else%>
+  <div class="large-12 medium-12 small-12 columns left">
+    <ul class="inline-list qnainfo left">
+      <li> <span class="date">Asked <%= @post.created_at.to_formatted_s(:long) %></span></li>
+      <li><span class="category"><%= link_to "#{@post.category.name}", posts_path(category: @post.category.name) %></span></li>
+    </ul>
+  </div>
+
+  <%end%>
+
+
+
+</div>
+
+
 <div class="row answertitle">
-    <div class="large-12 small-12 columns ">
-      <h5><%=pluralize(@post.comments_count, "Answer") %> </h5></div>
-    </div>
+  <div class="large-12 small-12 columns ">
+    <h5><%=pluralize(@post.comments_count, "Answer") %> </h5></div>
+  </div>
 
-<% @post.comments.each do |comment| %>
-    <div class="row answerbox">
-      <div class="large-1 small-12 columns votesection">
+  <% @post.comments.each do |comment| %>
+  <div class="row answerbox">
+    <div class="large-1 small-12 columns votesection">
 
-       <ul class="vote">
-        <li><%= link_to "^", like_post_comment_path(@post, comment), method: :put, class: "uk-button vote" %> </li>
-      </ul>
-      
-      <ul class="vote">
-        <li> <%= comment.get_upvotes.size - comment.get_downvotes.size %></li>
+     <ul class="vote">
+      <li><%= link_to image_tag("icon_up.png", :border => 0, width: 18), like_post_comment_path(@post, comment), method: :put, class: "uk-button" %> </li>
+    </ul>
 
-      </ul>
+    <ul class="votenumber vote">
+      <li> <%= comment.get_upvotes.size - comment.get_downvotes.size %></li>
+    </ul>
 
-      <ul class="vote">
-        <li><%= link_to "v", dislike_post_comment_path(@post, comment), method: :put, class: "uk-button vote" %></li>
-      </ul>
+    <ul class="vote">
+      <li><%= link_to image_tag("icon_down.png", :border => 0, width: 18), dislike_post_comment_path(@post, comment), method: :put, class: "uk-button" %></li>
+    </ul>
 
-    </div>
-    <div class="large-11 small-12 columns question">
-      <p><%= simple_format comment.body %> </p>
+  </div>
+  <div class="large-11 small-12 columns question">
+    <p><%= simple_format comment.body %> </p>
 
-      <ul class="inline-list info">
-        <li> <span class="date">Answered on <%= comment.created_at.to_formatted_s(:long) %></span></li>
-        <li><span class="firstlastname"><%= link_to "#{comment.user.name}", profiles_lawyerprofile_path(user: comment.user.id)%> from <%= comment.user.company %> | Comment score: <%= comment.get_upvotes.size - comment.get_downvotes.size %></span></li>
-        <li><span class="firstlastname">User rating: <%= comment.user.karma %> <span></li>
-        <li><span class="firstlastname">
-          <% if comment.user.verified == true %> 
-            <%= "Verified solicitor"%>
-            <%else%>
-            <%= "Pending verification" %><span></li>
-            <%end%>
+    <ul class="inline-list info">
+      <li> <span class="date">Answered on <%= comment.created_at.to_formatted_s(:long) %></span></li>
+      <li><span class="upvotesinfo">Upvotes: <%= comment.get_upvotes.size - comment.get_downvotes.size %></span></li>
+      <li> <img><%= image_tag "missingsmall.png", class: "smallprofileimage"%></img><span class="firstlastname"><%= link_to "#{comment.user.name},", profiles_lawyerprofile_path(user: comment.user.id)%>  <span class="companyinfo">  <%= comment.user.company %> <span class="infodivider">| </span> <span class="userscoreinfo"> User Score: <%= comment.user.karma %> </span></span></span></li>
+       
 
-          <% if comment.user == current_user %>
-            <li><span class="firstlastname"> <%= link_to 'Delete comment', post_comment_path(@post, comment), method: :delete %> </span> </li>
-            <%else%>
-            <%end%>
+      <li>
+        <% if comment.user.verified == true %> 
+        <span class="verifiedsolicitor">
+        <%= "Verified solicitor"%></span>
+        <%else%>
+        <span class="pendingverification">
+        <%= "Solicitor verification pending" %><span></li>
+        <%end%>
+
+        <% if comment.user == current_user %>
+        <li><span class="firstlastname"> <%= link_to 'Delete comment', post_comment_path(@post, comment), method: :delete %> </span> </li>
+        <%else%>
+        <%end%>
         
       </ul>
     </div>
   </div>
-<%end%>
-
-    <% if user_signed_in? && current_user.is_solicitor == true %>
-<%= simple_form_for [@post, Comment.new]  do |f| %>
-  <h3>Share an answer </h3>
-    <div class="row askquestionform">
-      <div class="large-12 small-12 columns questioninput">
-      <%= f.text_area :body%>
-      </div>
-    </div>
-    <br>
-      <%= f.submit "Add Comment", class: "button success" %>
   <%end%>
-      
-      <%elsif user_signed_in? && current_user.is_solicitor == false%>
-        <br>
-        <br>
-        <%= link_to "Ask a question", new_post_path, class: "button" %>
 
-      <%else%>  
 
-      <br>
-      <br>
-      <%= link_to "Sign in / register to post an answer", new_user_session_path, class: "button" %>
-      <%end%>
+  <div class="row answerquestionform">
+    <div class="large-12 small-12 columns questioninput">
+      <% if user_signed_in? && current_user.is_solicitor == true %>
+      <%= simple_form_for [@post, Comment.new]  do |f| %>
+
+      <h3>Share an answer </h3>
+
+      <%= f.text_area :body%>
+    </div>
+     <br/>
+    <%= f.submit "Post Answer", class: "button button-postanswer" %>
+    <%end%>
+
+  </div>
+
+  <%elsif user_signed_in? && current_user.is_solicitor == false%>
+  <br/>
+  <br/>
+
+  <%else%>  
+
+   <br/> <br/> <br/> <br/>
+  <%= link_to "Sign in / Sign up to post an answer", new_user_session_path, class: "button button-signinsignuptopost" %>
+  <%end%>
 </div>
+
+

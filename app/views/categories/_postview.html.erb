@@ -1,51 +1,83 @@
 
+
+<div class="row">
+<div class="large-12 columns sub-sub-nav">
+  <ul class="large-12 columns" role="navigation">
+  <li role="menuitem"> <%= link_to "Most Recent", :recent => true %> </li>
+  <li role="menuitem"> <%= link_to "Most Popular", :popular => true  %></li>
+  <li role="menuitem"> <%= link_to "Unanswered", :unanswered => true %></li>
+</ul>
+</div>
+</div>
+
+
+
 <% @posts.each do |post| %>      
 
-  <div class="row questionbox">
-    <div class="large-2 small-12 columns">
-      <div class="large-6 small-6 columns">
 
-        <ul class="answersnumber">
-          <li><%= post.comments_count %></li>
-        </ul>
+<div class="row questionbox">
+  <div class="large-2 small-12 columns">
+    <div class="large-6 small-6 columns">
 
-        <ul class="answerslabel">
-          <li><%= link_to "Answers", post, class: "answerslabel" %> </li>
-        </ul>
+      <ul class="answersnumber">
+        <li><%= post.comments_count %></li>
+      </ul>
 
-      </div>
-      <div class="large-6 small-6 columns">
+      <ul class="answerslabel">
+        <li><%= link_to "Answers", post, class: "answerslabel" %> </li>
+      </ul>
 
-        <ul class="answersnumber">
-          <li><%= post.tally %></li>
-        </ul>
+    </div>
+    <div class="large-6 small-6 columns">
 
-        <ul class="answerslabel">
-          <li><%= link_to "Upvotes", post, class: "answerslabel" %> </li>
-        </ul>
+      <ul class="answersnumber">
+        <li><%= post.tally %></li>
+      </ul>
 
-      </div>
+      <ul class="answerslabel">
+        <li><%= link_to "Upvotes", post, class: "answerslabel" %> </li>
+      </ul>
+
+    </div>
   </div>
   
 
+
+
+
+  <% if user_signed_in? && current_user.is_solicitor == true %>
+
   <div class="large-9 small-12 columns question">
-  <%= link_to post do %>
+    <%= link_to post do %>
     <p><%= post.title %></p>
-  <%end%>
+    <%end%>
     <ul class="inline-list info">
       <li> <span class="date">Asked <%= post.created_at.to_formatted_s(:long) %> </span></li>
       <li><span class="category"><%= link_to "#{post.category.name}", posts_path(category: post.category.name) %></span></li>
     </ul>
   </div>
 
-  
-
   <div class="large-1 small-12 columns  answer-button">
     <%= link_to "Answer", post, class: "uk-button in-line right" %> 
   </div>
+
+  <%else%>
+
+  <div class="large-10 small-12 columns question">
+    <%= link_to post do %>
+    <p><%= post.title %></p>
+    <%end%>
+    <ul class="inline-list info">
+      <li> <span class="date">Asked <%= post.created_at.to_formatted_s(:long) %> </span></li>
+      <li><span class="category"><%= link_to "#{post.category.name}", posts_path(category: post.category.name) %></span></li>
+    </ul>
+  </div>
+
+  <%end%>
+
   
 </div>
 
 <%end%>
 
-  
+

@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
   
+  get 'static_pages/about'
+
+  get 'static_pages/faq'
+
+  get 'static_pages/contact'
+
+  get 'static_pages/how_it_works'
+
+  get 'static_pages/privacy'
+
+  get 'static_pages/terms'
+
   get 'categories/corporate'
 
   get 'categories/ip'
@@ -30,7 +42,6 @@ Rails.application.routes.draw do
       get :recent
       get :popular
       get :unanswered
-      get :category_and_recent
     end
     resources :comments do
         member do

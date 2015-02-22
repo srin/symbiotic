@@ -1,5 +1,7 @@
 
-<%= form_for(@post) do |f| %>
+<div class="large-offset-1">
+
+  <%= form_for(@post) do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "error") %> prevent this question from being posted. Please take a look at these errors and try again.</h2>
@@ -15,7 +17,7 @@
 
   <form>
    
-    <div class="row askquestionform">
+    <div class="row askquestionform ">
       <div class="large-12 small-12 columns questioninput">
 
     <%= f.label :title, "1. Your question" %><br>
@@ -37,13 +39,14 @@
       </div>
     </div>
   
-  <div class="button-postquestion">
     <div class="actions">
-      <%= f.submit "Post question", class: "button" %> 
+      <%= f.submit "Post Question", class: "button button-postquestion" %> 
     </div>
-  </div>
 
   
 <% end %>
 </div>
 </div>
+
+</div>
+

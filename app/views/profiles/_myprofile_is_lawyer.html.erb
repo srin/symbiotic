@@ -1,62 +1,56 @@
 
-  <div class="row">
+  <div class="large-12 columns profile">
 
-    <div class="large-2 panel columns profile">
+    <div class="large-2 medium-3 small-12 panel columns">
       
         <% if @user.image.exists? %>
-         <img><%= image_tag @user.image.url(:medium)%></img>
+         <img><%= image_tag @user.image.url(:medium), class: "profileimage"%></img>
         <%else%>
-          <img><%= image_tag "missing.png"%></img>     
+          <img><%= image_tag "missing.png", class: "profileimage"%></img>     
        <%end%>
 
-      <ul class="profilename large-centered">
+      <ul class="profilename">
         <li><p href="" class="firstname"><%= @user.name %></p></li>
       </ul>
 
-      <ul class="profilename large-centered">
-        <li><p href="" class="firstname">Firm: <%= @user.company %></p></li>
+      <ul class="profilename">
+        <li><p href="" class="company"><%= @user.company %></p></li>
       </ul>      
 
-      <ul class="profilename large-centered">
-        <li><p href="" class="firstname">Email: <%= @user.email %></p></li>
+      <ul class="profilename">
+        <li><p href="" class="email"><%= @user.email %></p></li>
       </ul>
 
-      <ul class="profiletext profileuserscorenumber large-centered">
+      <ul class="profiletext profileuserscorenumber">
         <li><p href="" class="profileuserscorenumber"><%= @user.karma %></p></li>
       </ul>
 
-      <ul class="profiletext profileuserscorelabel large-centered">
-        <li><p href="" class="profileuserscorelabel">Userscore</p></li>
+      <ul class="profiletext profileuserscorelabel">
+        <li><p href="" class="profileuserscorelabel">User Score</p></li>
       </ul>
 
-      <ul class="profiletext profileanswersnumber large-centered">
+      <ul class="profiletext profileanswersnumber">
         <li><p href="" class="profileanswersnumber"> <%= @user.comments_count %></p></li>
       </ul>
 
-      <ul class="profiletext profileanswerslabel large-centered">
+      <ul class="profiletext profileanswerslabel">
         <li><p href="" class="profileanswerslabel">Answers</p></li>
       </ul>
 
-       <ul class="profiletext profileanswerslabel large-centered">
+       <ul class="profiletext profileedit">
         <li><%= link_to "Edit my profile", edit_user_registration_path %></li>
       </ul>
 
     </div>
 
 
-    <div class="large-10 columns">
+    <div class="large-9 medium-8 small-12 columns right">
 
       <div class="row profileanswertitle">
-        <div class="large-6 small-6 columns profileanswerslist">
+        <div class="large-12 small-12 columns profileanswerslist">
           <ul class="inline-list">
             <li><span class="profileanswertitle">Answers</span></li>
           </ul>
-        </div>
-
-        <div class="large-6 small-6 columns">
-          <div class="button-profileaskquestion">
-            <%= link_to "Ask a Question", new_post_path, class: "uk-button in-line button-askquestion right"%>
-          </div>
         </div>
       </div>
 
@@ -64,7 +58,7 @@
  <% @comments.each do |comment| %>
       <div class="row profileanswerbox">
      
-        <div class="large-2 small-12 columns profileupvotes">
+        <div class="large-2 medium-4 small-12 columns profileupvotes">
          <ul class="upvotesnumber">
           <li><a href="" class="upvotesnumber"><%= comment.get_likes.size %></a></li>
         </ul>
@@ -72,9 +66,9 @@
           <li><a href="" class="upvoteslabel">Upvotes</a></li>
         </ul>
       </div>
-		
-		<%= link_to post_path(id: comment.post) do %> 
-      <div class="large-10 small-12 columns profileanswer">
+    
+    <%= link_to post_path(id: comment.post) do %> 
+      <div class="large-10 medium-8 small-12 columns profileanswer">
        <p><%= comment.body %> </p>
        <%end%>
 
@@ -86,4 +80,4 @@
     </div>
     
     </div>
-	<%end%>
+  <%end%>

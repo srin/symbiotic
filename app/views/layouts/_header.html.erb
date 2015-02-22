@@ -1,77 +1,180 @@
 <div class="fixed">
 
-    <nav class="top-bar" data-topbar>
+  <nav class="top-bar show-for-large-up hide-for-medium-down">
+    <div class="large-12 columns">
 
       <ul class="title-area">
-        <li class="name">
-          <h1>
-            <a href="/">
-              Symbiotic
-            </a>
-          </h1>
-        </li>
-        <li id="menuicon" class="toggle-topbar menu-icon menuicon" style:"color=#000000;"><a href="#" style:"color=#000000;"><span>Menu</span></a></li>
-      </ul>
+        <li>
+         <a class="name inline-list" href="/">
+          <span class="logotext">Symbiotic<span class="logosubtext">Q&ampA Forum for Law</span></span>
+        </a>
+      </li>
+    </ul>
+    <div class="right">
+     <ul class="button-group">
 
-      <ul class="title-area">
-        <li class="name">
-          <h2><a href="#">Q&ampA Forum for Law</a></h2>
-        </li>
-      </ul>
+      <li class="search searchicon">
+        <form>
+          <%= search_form_for @q do |f| %>
+          <%= f.search_field :description_or_title_or_comments_body_cont, :placeholder => "Search" %>
+        </form>
+        <%= f.submit class: "searchbutton" %>
+        <%end%>
 
-      <section class="top-bar-section">
+      </li>
+
+      <li class= "topbuttons" >
+       <%= link_to "Home", root_path %>
+       <span style="padding-right: 20px;"></span>
+       <% if user_signed_in? %>
+       <%= link_to "My profile", profiles_myprofile_path %>
+       <span style="padding-right: 5px;">|</span>
+       <%= link_to "Logout", destroy_user_session_path, method: :delete%>
+       
+
+       <%else%>
+
+       <%= link_to "Login", new_user_session_path %>
+       <span style="padding-right: 5px;">|</span>
+       <%= link_to "Sign up", new_user_registration_path %>
+       <%end%>
+     </li>
+
+   </ul>
+ </div>
+
+</div>
+</nav>
 
 
 
-       <ul class="right">
-        <ul>
-          <li class="search">
-            <form>
-              <%= search_form_for @q do |f| %>
-               
-                <%= f.search_field :description_or_title_or_comments_body_cont, :placeholder => "Search" %>
-            </form>
-            
-            <li class="has-button">
-               <%= f.submit class: "small button" %>
-               <%end%>
-            </li>
-          </li>
+<nav class="top-bar show-for-medium-only">
+  <div class="large-12 medium-12 columns">
 
-          <ul>
+   <a class="name inline-list" href="/">
+    <span class="logotext">Symbiotic<span class="logosubtext">Q&ampA Forum for Law</span></span>
+  </a>
 
-        
-          </ul>
+  <div class="right">
 
-        </ul>
-      </ul>
-    </section>
-  </nav>
+    <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button dropdown">MENU</button><br>
+    <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true" tabindex="-1">
+      <li class="search searchicon">
+        <form>
+          <%= search_form_for @q do |f| %>
+          <%= f.search_field :description_or_title_or_comments_body_cont, :placeholder => "Search" %>
+        </form>
+        <%= f.submit class: "searchbutton" %>
+        <%end%>
+
+      </li>
+
+      <li> <%= link_to "Home", root_path %></li>
+      <li><% if user_signed_in? %>
+        <%= link_to "My profile", profiles_myprofile_path %>
+       <%= link_to "Logout", destroy_user_session_path, method: :delete%>
+
+       <%else%>
+
+       <%= link_to "Login", new_user_session_path %>
+       <%= link_to "Sign up", new_user_registration_path %>
+       <%end%></li>
+     </ul>
+
+
+   </div>
+ </div>
+</nav>
+
+<nav class="top-bar show-for-small-down hide-for-medium-up">
+  <div class="large-12 small-12 columns">
+
+   <a class="name inline-list" href="/">
+    <span class="logotext">Symbiotic</span>
+  </a>
+
+  <div class="right">
+
+    <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button dropdown">MENU</button><br>
+    <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true" tabindex="-1">
+      <li class="search searchicon">
+        <form>
+          <%= search_form_for @q do |f| %>
+          <%= f.search_field :description_or_title_or_comments_body_cont, :placeholder => "Search" %>
+        </form>
+        <%= f.submit class: "searchbutton" %>
+        <%end%>
+
+      </li>
+
+      <li> <%= link_to "Home", root_path %></li>
+      <li><% if user_signed_in? %>
+        <%= link_to "My profile", profiles_myprofile_path %>
+       <%= link_to "Logout", destroy_user_session_path, method: :delete%>
+
+       <%else%>
+
+       <%= link_to "Login", new_user_session_path %>
+       <%= link_to "Sign up", new_user_registration_path %>
+       <%end%></li>
+     </ul>
+
+   </div>
+ </div>
+</nav>
 
 </div>
 
- <div class="fixed">
-  
-  <dl class="sub-nav">
-  <dd> <%= link_to "Most Recent", :recent => true %> </dd>
-  <dd> <%= link_to "Most Popular", :popular => true  %></dd>
-  <dd> <%= link_to "Unanswered", :unanswered => true %></dd>
 
+<div class="large-12 columns" style="padding: 0px;">
+ <div class="sub-nav fixed">
 
-  
-  <div class="button-askquestion">
-  <dd> <%= link_to "Ask a Question", new_post_path, class: "uk-button in-line right"  %>
-  </div>
-              <%= link_to "Home", root_path %>
-  <% if user_signed_in? %>
-              <%= link_to "Logout", destroy_user_session_path, method: :delete%>
-              <%= link_to "Account", edit_user_registration_path %>
-              <%= link_to "My profile", profiles_myprofile_path %>
-
-              <%else%>
-
-            <%= link_to "Login", new_user_session_path %>
-            <%= link_to "Sign up", new_user_registration_path%>
-              <%end%>
+   <dl class="large-9 medium-8 small-12 columns" role="navigation">
+     <dd role="menuitem"><%= link_to "Show all", root_path %></dd>
+     <dd role="menuitem"><%= link_to "Corporate", categories_corporate_path %></dd>
+     <dd role="menuitem"><%= link_to "Intellectual Property", categories_ip_path%></dd>
+     <dd role="menuitem"><%= link_to "Employment", categories_employment_path %></dd>
+     <dd role="menuitem"><%= link_to "Real Estate", categories_real_estate_path %></dd>
+     <dd role="menuitem"><%= link_to "Venture Capital", categories_venture_cap_path %></dd>
+   </dl>
+ 
+ 
+ <dl class="large-3 medium-4 small-12 columns button-askquestion right">
+  <%= link_to "Ask a Question", new_post_path%>
 </dl>
- </div>
+
+</div>
+</div>
+
+
+
+
+</div>
+
+<div id="sticky_footer">
+
+  <footer>
+    <div class="large-12 medium-12 small-12 columns subbottombar">
+
+      <ul class="large-5 medium-6 small-12 columns inline-list left" style="padding-left:20px;">
+        <li><%= link_to "About", static_pages_about_path %> </li>
+        <li><%= link_to "FAQ", static_pages_faq_path %></li>
+        <li><%= link_to "Privacy Policy", static_pages_privacy_path %></li>
+        <li><%= link_to "Terms", static_pages_terms_path %></li>
+      </ul>
+      
+      <div class="large-3 medium-4 small-12 columns" style="padding-right:20px;">
+        <ul class="inline-list right">
+          <li><a href="#">Contact:  symbiotic@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </hr>
+  <div class="large-12 medium-12 small-12 columns text-center bottombar">
+    <p>Symbiotic © 2015 All Rights Reserved.</p>
+  </div>
+
+</footer>
+</div>
+
