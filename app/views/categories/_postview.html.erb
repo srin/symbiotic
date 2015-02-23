@@ -3,9 +3,9 @@
 <div class="row">
 <div class="large-12 columns sub-sub-nav">
   <ul class="large-12 columns" role="navigation">
-  <li role="menuitem"> <%= link_to "Most Recent", :recent => true %> </li>
-  <li role="menuitem"> <%= link_to "Most Popular", :popular => true  %></li>
-  <li role="menuitem"> <%= link_to "Unanswered", :unanswered => true %></li>
+  <li role="menuitem" class="catitem"> <%= link_to "Most Recent", :recent => true %> </li>
+  <li role="menuitem" class="catitem"> <%= link_to "Most Popular", :popular => true  %></li>
+  <li role="menuitem" class="catitem"> <%= link_to "Unanswered", :unanswered => true %></li>
 </ul>
 </div>
 </div>
@@ -56,6 +56,8 @@
       <li><span class="category"><%= link_to "#{post.category.name}", posts_path(category: post.category.name) %></span></li>
     </ul>
   </div>
+
+  
 
   <div class="large-1 small-12 columns  answer-button">
     <%= link_to "Answer", post, class: "uk-button in-line right" %> 
