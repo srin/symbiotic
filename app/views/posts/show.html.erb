@@ -18,7 +18,7 @@
       <li> <span class="date">Asked <%= @post.created_at.to_formatted_s(:long) %></span></li>
       <li><span class="category"><%= link_to "#{@post.category.name}", posts_path(category: @post.category.name) %></span></li>
       <% if @post.user == current_user %>
-      <li> <%= link_to "Edit post", edit_post_path %> %> </li>
+      <li class="editquestionbutton"><%= link_to "Edit Question", edit_post_path %> </li>
       <%end%>
     </ul>
   </div>
@@ -35,7 +35,7 @@
       <li> <span class="date">Asked <%= @post.created_at.to_formatted_s(:long) %></span></li>
       <li><span class="category"><%= link_to "#{@post.category.name}", posts_path(category: @post.category.name) %></span></li>
             <% if @post.user == current_user %>
-      <li> <%= link_to "Edit post", edit_post_path %> %> </li>
+      <li class="editquestionbutton"><%= link_to "Edit Question", edit_post_path %> </li>
       <%end%>
     </ul>
   </div>

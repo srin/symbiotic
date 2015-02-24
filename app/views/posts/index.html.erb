@@ -1,10 +1,38 @@
+
 <div class="row">
-<div class="large-12 columns sub-sub-nav">
-  <ul class="large-12 columns" role="navigation">
+<div class="sub-sub-nav">
+  <div class="large-7 medium-6 small-12 columns menuitems">
+  <ul role="navigation">
   <li role="menuitem" class="activeitem"> <%= link_to "Most Recent", recent_posts_path %> </li>
   <li role="menuitem" class="activeitem"> <%= link_to "Most Popular", popular_posts_path  %></li>
-  <li role="menuitem" class="activeitem"> <%= link_to "Unanswered", unanswered_posts_path %></li>
+  <li role="menuitem" class="activeitem"> <%= link_to "Unanswered", unanswered_posts_path %></li></li>
+
 </ul>
+</div>
+
+
+<div class="large-5 medium-6 small-12 columns searchbar">
+  <div class="right">
+    <ul class="button-group">
+            <li>
+       <p class="icon_search_background2"> </p>
+      </li>
+       <li class="icon_search2">
+        <img><%= image_tag "icon_search.png", class: "icon_search2"%></img> 
+      </li>
+      <li class="search">
+        <form> 
+          <%= search_form_for @q do |f| %>
+          <%= f.search_field :description_or_title_or_comments_body_cont, :placeholder => "Search" %>
+        </form>
+        <%= f.submit class: "searchbutton" %>
+        <%end%>
+      </li>
+
+    </ul>
+  </div>
+    </div>
+
 <ul>
   <hr>
 </ul>
@@ -75,7 +103,7 @@
 
 <%end%>
 
-
+<%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
 
 
   

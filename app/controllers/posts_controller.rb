@@ -7,11 +7,11 @@ class PostsController < ApplicationController
   # GET /posts.json
     def index
     if params[:category].blank?
-      @posts = @q.result.includes(:comments).order("created_at DESC")
+      @posts = @q.result.includes(:comments).order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
       @heading = ""
     else
       @category_id = Category.find_by(name: params[:category]).id
-      @posts = @q.result.includes(:comments).where(category_id: @category_id).order("created_at DESC")
+      @posts = @q.result.includes(:comments).where(category_id: @category_id).order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
       @heading = "- " + Category.find_by(name: params[:category]).name
     end
   end

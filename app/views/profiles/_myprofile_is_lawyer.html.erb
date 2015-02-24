@@ -81,3 +81,44 @@
     
     </div>
   <%end%>
+
+<%= will_paginate @comments, renderer: BootstrapPagination::Rails %>
+
+<h2>Questions </h2>
+
+<% @posts.each do |post| %>
+      <div class="row profileanswerbox">
+     
+        <div class="large-2 medium-4 small-12 columns profileupvotes">
+         <ul class="answersnumber">
+          <li><a href=""><%= post.comments_count %></a></li>
+        </ul>
+        <ul class="upvoteslabel">
+          <li><a href="">Answers</a></li>
+        </ul>
+      </div>
+    
+    <%= link_to post_path(id: post) do %> 
+      <div class="large-10 medium-8 small-12 columns profileanswer">
+        <p><%= post.title %> </p>
+        <p class=""><%= post.description %> </p>
+       <%end%>
+
+       <ul class="inline-list profileinfo">
+        <li> <span class="date">Asked on: <%= post.created_at.to_formatted_s(:long) %></span></li>
+        <li><span class="category"><%= link_to "#{post.category.name}", posts_path(category: post.category.name) %></span></li>
+     
+        
+        <li><%= link_to "Edit Question", edit_post_path(id: post), class: "uk-button in-line right editquestionbutton" %> </li>
+      </ul>
+
+    
+      </div>
+
+      
+
+    </div>
+    
+  <%end%>
+
+<%= will_paginate @posts, renderer: BootstrapPagination::Rails %>

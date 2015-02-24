@@ -1,6 +1,6 @@
 <div class="fixed">
 
-  <nav class="top-bar show-for-large-up hide-for-medium-down">
+  <nav class="top-bar show-for-medium-up hide-for-small-down">
     <div class="large-12 columns">
 
       <ul class="title-area">
@@ -12,23 +12,6 @@
     </ul>
     <div class="right">
      <ul class="button-group">
-
-      <li>
-       <p class="icon_search_background"> sfsdf</p>
-      </li>
-      <li class="icon_search">
-        <img><%= image_tag "icon_search.png", class: "icon_search"%></img> 
-      </li>
-
-      <li class="search">
-        <form> 
-          <%= search_form_for @q do |f| %>
-          <%= f.search_field :description_or_title_or_comments_body_cont, :placeholder => "Search" %>
-        </form>
-        <%= f.submit class: "searchbutton" %>
-        <%end%>
-
-      </li>
 
       <li class= "topbuttons" >
        <%= link_to "Home", root_path %>
@@ -55,100 +38,95 @@
 
 
 
-<nav class="top-bar show-for-medium-only">
-  <div class="large-12 medium-12 columns">
-
-   <a class="name inline-list" href="/">
-    <span class="logotext">Symbiotic<span class="logosubtext">Q&ampA Forum for Law</span></span>
-  </a>
-
-  <div class="right">
-
-    <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button dropdown">MENU</button><br>
-    <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true" tabindex="-1">
-      <li class="search searchicon">
-        <form>
-          <%= search_form_for @q do |f| %>
-          <%= f.search_field :description_or_title_or_comments_body_cont, :placeholder => "Search" %>
-        </form>
-        <%= f.submit class: "searchbutton" %>
-        <%end%>
-
-      </li>
-
-      <li> <%= link_to "Home", root_path %></li>
-      <li><% if user_signed_in? %>
-        <%= link_to "My profile", profiles_myprofile_path %>
-       <%= link_to "Logout", destroy_user_session_path, method: :delete%>
-
-       <%else%>
-
-       <%= link_to "Login", new_user_session_path %>
-       <%= link_to "Sign up", new_user_registration_path %>
-       <%end%></li>
-     </ul>
-
-
-   </div>
- </div>
-</nav>
-
 <nav class="top-bar show-for-small-down hide-for-medium-up">
   <div class="large-12 small-12 columns">
 
    <a class="name inline-list" href="/">
-    <span class="logotext">Symbiotic</span>
+    <span class="logotextsmall">Symbiotic</span>
   </a>
 
-  <div class="right">
+    <div class="right smallheader">
+     <ul class="button-group">
 
-    <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button dropdown">MENU</button><br>
-    <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true" tabindex="-1">
-      <li class="search searchicon">
-        <form>
-          <%= search_form_for @q do |f| %>
-          <%= f.search_field :description_or_title_or_comments_body_cont, :placeholder => "Search" %>
-        </form>
-        <%= f.submit class: "searchbutton" %>
-        <%end%>
-
-      </li>
-
-      <li> <%= link_to "Home", root_path %></li>
-      <li><% if user_signed_in? %>
-        <%= link_to "My profile", profiles_myprofile_path %>
+      <li class= "topbuttons" >
+       
+       <% if user_signed_in? %>
+       <%= link_to "My profile", profiles_myprofile_path %>
+       <span style="padding-right: 5px;">|</span>
        <%= link_to "Logout", destroy_user_session_path, method: :delete%>
+       
 
        <%else%>
 
        <%= link_to "Login", new_user_session_path %>
+       <span style="padding-right: 5px;">|</span>
        <%= link_to "Sign up", new_user_registration_path %>
-       <%end%></li>
-     </ul>
+       <%end%>
+     </li>
 
-   </div>
+   </ul>
+ </div>
  </div>
 </nav>
 
 </div>
 
 
-<div class="large-12 columns">
- <div class="sub-nav fixed">
-
-   <dl class="large-9 medium-8 small-12 columns" role="navigation">
-     <dd role="menuitem" class="activeitem"><%= link_to "Show all", root_path %></dd>
-     <dd role="menuitem" class="activeitem"><%= link_to "Corporate", categories_corporate_path %></dd>
-     <dd role="menuitem" class="activeitem"><%= link_to "Intellectual Property", categories_ip_path%></dd>
-     <dd role="menuitem" class="activeitem"><%= link_to "Employment", categories_employment_path %></dd>
-     <dd role="menuitem" class="activeitem"><%= link_to "Real Estate", categories_real_estate_path %></dd>
-     <dd role="menuitem" class="activeitem"><%= link_to "Venture Capital", categories_venture_cap_path %></dd>
-   </dl>
+<div class="large-12 columns show-for-large-up hide-for-medium-down">
+ <div class="sub-nav  sub-nav-large fixed">
+    <ul class="large-10 medium-8 small-6 columns" role="navigation">
+     <li role="menuitem" class="activeitem"><%= link_to "Show all", root_path %></li>
+     <li role="menuitem" class="activeitem"><%= link_to "Corporate", categories_corporate_path %></li>
+     <li role="menuitem" class="activeitem"><%= link_to "Intellectual Property", categories_ip_path%></li>
+     <li role="menuitem" class="activeitem"><%= link_to "Employment", categories_employment_path %></li>
+     <li role="menuitem" class="activeitem"><%= link_to "Real Estate", categories_real_estate_path %></li>
+     <li role="menuitem" class="activeitem" style="padding-right: 0px;"><%= link_to "Venture Capital", categories_venture_cap_path %></li>
+   </ul>
  
  
- <dl class="large-3 medium-4 small-12 columns button-askquestion right">
+ <ul class="large-1 medium-3 small-6 columns button-askquestion right">
   <%= link_to "Ask a Question", new_post_path%>
-</dl>
+</ul>
+
+</div>
+</div>
+
+<div class="large-12 columns hide-for-large-up hide-for-small-down">
+ <div class="sub-nav fixed">
+    <ul class="large-9 medium-8 small-6 columns" role="navigation">
+     <li role="menuitem" class="activeitem"><%= link_to "Show all", root_path %></li>
+     <li role="menuitem" class="activeitem"><%= link_to "Corporate", categories_corporate_path %></li>
+     <li role="menuitem" class="activeitem"><%= link_to "Intellectual Property", categories_ip_path%></li>
+     <li role="menuitem" class="activeitem"><%= link_to "Employment", categories_employment_path %></li>
+     <li role="menuitem" class="activeitem"><%= link_to "Real Estate", categories_real_estate_path %></li>
+     <li role="menuitem" class="activeitem"><%= link_to "Venture Capital", categories_venture_cap_path %></li>
+   </ul>
+ 
+ 
+ <ul class="large-2 medium-3 small-6 columns button-askquestion right">
+  <%= link_to "Ask a Question", new_post_path%>
+</ul>
+
+</div>
+</div>
+
+<div class="large-12 small-12 columns show-for-small-down hide-for-medium-up">
+ <div class="sub-nav  sub-nav-small fixed">
+<button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button dropdown">MENU</button><br>
+    <ul id="drop1" data-dropdown-content class="f-dropdown medium-6 small-6 columns" aria-hidden="true" tabindex="-1" role="navigation">
+
+     <li role="menuitem" class="activeitem"><%= link_to "Show all", root_path %></li>
+     <li role="menuitem" class="activeitem"><%= link_to "Corporate", categories_corporate_path %></li>
+     <li role="menuitem" class="activeitem"><%= link_to "Intellectual Property", categories_ip_path%></li>
+     <li role="menuitem" class="activeitem"><%= link_to "Employment", categories_employment_path %></li>
+     <li role="menuitem" class="activeitem"><%= link_to "Real Estate", categories_real_estate_path %></li>
+     <li role="menuitem" class="activeitem"><%= link_to "Venture Capital", categories_venture_cap_path %></li>
+   </ul>
+ 
+ 
+ <ul class="small-6 columns button-askquestion right">
+  <%= link_to "Ask a Question", new_post_path%>
+</ul>
 
 </div>
 </div>

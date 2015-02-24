@@ -66,7 +66,7 @@
         <li><span class="category"><%= link_to "#{post.category.name}", posts_path(category: post.category.name) %></span></li>
      
         
-        <li><%= link_to "Edit Question", edit_post_path(id: post), class: "uk-button in-line right editbutton" %> </li>
+        <li><%= link_to "Edit Question", edit_post_path(id: post), class: "uk-button in-line right editquestionbutton" %> </li>
       </ul>
 
     
@@ -77,3 +77,5 @@
     </div>
     
   <%end%>
+
+<%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
