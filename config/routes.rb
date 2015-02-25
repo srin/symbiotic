@@ -12,37 +12,36 @@ Rails.application.routes.draw do
 
   get 'static_pages/terms'
 
-  get 'categories/corporate'
+  
+  get 'posts/corporate'
 
-  get 'categories/ip'
+  get 'posts/ip'
 
-  get 'categories/employment'
+  get 'posts/show_all'
 
-  get 'categories/real_estate'
+  get 'posts/employment'
 
-  get 'categories/venture_cap'
+  get 'posts/real_estate'
 
-  get 'profiles/myprofile' do
-    collection do
-      get :recent
-      get :popular
-    end
-  end
+  get 'posts/venture_cap'
 
-  get 'profiles/lawyerprofile' do
-    collection do
-      get :recent
-      get :popular
-    end
-  end
+  get 'profiles/myprofile' 
+    
+
+  get 'profiles/lawyerprofile' 
+
+  match 'corporate' => 'posts#corporate', via: [:get]
+  match 'ip' => 'posts#ip', via: [:get]
+  match 'employment' => 'posts#employment', via: [:get]
+  match 'realestate' => 'posts#real_estate', via: [:get]
+  match 'venturecapital' => 'posts#venturecapital', via: [:get]
+
+
+  match 'search' => 'posts#index', via: [:get, :post], as: :search
+  
 
   devise_for :users
   resources :posts do
-    collection do
-      get :recent
-      get :popular
-      get :unanswered
-    end
     resources :comments do
         member do
       put "like", to: "comments#upvote"

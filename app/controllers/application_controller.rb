@@ -33,9 +33,11 @@ protected
   
 end
 
-  def list_posts
-  @q = Post.ransack(params[:q])
-  end
+  # def list_posts
+  # @q = Post.ransack(params[:q])
+  # end
+
+  
 
   def store_location
     # store last url - this is needed for post-login redirect to whatever the user last visited.

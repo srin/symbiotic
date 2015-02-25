@@ -14,23 +14,7 @@
 
 <div class="large-5 medium-6 small-12 columns searchbar">
   <div class="right">
-    <ul class="button-group">
-            <li>
-       <p class="icon_search_background2"> </p>
-      </li>
-       <li class="icon_search2">
-        <img><%= image_tag "icon_search.png", class: "icon_search2"%></img> 
-      </li>
-      <li class="search">
-        <form> 
-          <%= search_form_for @q do |f| %>
-          <%= f.search_field :description_or_title_or_comments_body_cont, :placeholder => "Search" %>
-        </form>
-        <%= f.submit class: "searchbutton" %>
-        <%end%>
-      </li>
-
-    </ul>
+    
   </div>
     </div>
 
@@ -83,7 +67,7 @@
     <%end%>
     <ul class="inline-list info">
       <li> <span class="date">Asked <%= post.created_at.to_formatted_s(:long) %> </span></li>
-      <li><span class="category"><%= link_to "#{post.category.name}", posts_path(category: post.category.name) %></span></li>
+      <li><span class="category"><%= link_to "#{post.category.name}", polymorphic_path([post.category.linkname])  %></span></li>
     </ul>
   </div>
 
@@ -101,7 +85,7 @@
     <%end%>
     <ul class="inline-list info">
       <li> <span class="date">Asked <%= post.created_at.to_formatted_s(:long) %> </span></li>
-      <li><span class="category"><%= link_to "#{post.category.name}", posts_path(category: post.category.name) %></span></li>
+      <li><span class="category"><%= link_to "#{post.category.name}", polymorphic_path([post.category.linkname]) %></span></li>
     </ul>
   </div>
 

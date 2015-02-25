@@ -1,41 +1,50 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show, :recent, :popular, :unanswered] 
+  before_action :authenticate_user!, except: [:index, :show, :recent, :search] 
   before_action :correct_user, only: [:edit, :update, :destroy]
+  has_scope :recent, :type => :boolean
+  has_scope :popular, :type => :boolean
+  has_scope :unanswered, :type => :boolean
 
   # GET /posts
   # GET /posts.json
     def index
-    if params[:category].blank?
-      @posts = @q.result.includes(:comments).order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
-      @heading = ""
-    else
-      @category_id = Category.find_by(name: params[:category]).id
-      @posts = @q.result.includes(:comments).where(category_id: @category_id).order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
-      @heading = "- " + Category.find_by(name: params[:category]).name
+    
+    q = params[:q]
+    @posts = Post.search(description_or_title_or_comments_body_cont: q).result.paginate(:page => params[:page], :per_page => 10)
+     # @posts = @q.result.includes(:comments).order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+    
     end
+
+    def search
+    @posts = @q.result.includes(:comments).order("created_at DESC")
+    render :index  
+    end
+
+    def show_all
+    @posts = apply_scopes(Post).order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+    end
+
+    def corporate
+    @posts = apply_scopes(Post).where(category_id: 1).order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+    end
+
+    def ip
+    @posts = apply_scopes(Post).where(category_id: 2).order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+    end
+
+  def employment
+    @posts = apply_scopes(Post).where(category_id: 3).order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
   end
 
-  def recent
-    
-    @posts = Post.recent
-    render action: :index
+  def real_estate
+    @posts = apply_scopes(Post).where(category_id: 5).order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
   end
 
-  def popular
-    @posts = Post.popular
-    render action: :index
-    
+  def venture_cap
+    @posts = apply_scopes(Post).where(category_id: 6).order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
   end
 
-  def unanswered
-    @posts = Post.unanswered
-    render action: :index
-    
-  end
-
-  # GET /posts/1
-  # GET /posts/1.json
   def show
   end
 
@@ -104,5 +113,8 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :description, :category_id)
     end
+
+
+    
 
 end

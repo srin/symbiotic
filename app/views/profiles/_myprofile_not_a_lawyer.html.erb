@@ -63,7 +63,7 @@
 
        <ul class="inline-list profileinfo">
         <li> <span class="date">Asked on: <%= post.created_at.to_formatted_s(:long) %></span></li>
-        <li><span class="category"><%= link_to "#{post.category.name}", posts_path(category: post.category.name) %></span></li>
+        <li><span class="category"><%= link_to "#{post.category.name}", polymorphic_path([post.category.linkname]) %></span></li>
      
         
         <li><%= link_to "Edit Question", edit_post_path(id: post), class: "uk-button in-line right editquestionbutton" %> </li>
