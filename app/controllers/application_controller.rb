@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_filter :list_posts
+  # before_filter :list_posts
   after_filter :store_location
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
