@@ -38,6 +38,12 @@
       <%= f.collection_select :category_id, Category.all, :id, :name %> <br>
       </div>
     </div>
+
+    <div class="row askquestionform">
+      <div class="large-12 small-12 columns">
+        4. Tick the box if you would like to ask this question anonymously <%= f.check_box :anonymous %> 
+      </div>
+    </div>  
   
     <div class="actions">
       <%= f.submit "Post Question", class: "button button-postquestion" %> 

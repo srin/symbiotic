@@ -9,13 +9,21 @@
     <p><%= @post.description %> </p>
   </div>
 
-
-
-  <% if user_signed_in? && current_user.is_solicitor == true %>
-
   <div class="large-6 medium-8 small-12 columns left">
     <ul class="inline-list qnainfo left">
-      <li> <span class="date">Asked <%= @post.created_at.to_formatted_s(:long) %></span></li>
+      <% if @post.created_at == @post.updated_at %>
+      <li> <span class="date">Asked <%= @post.created_at.to_formatted_s(:long) %> </span></li> 
+          <% if @post.anonymous == false %>
+            By <%= @post.user.name %> of <%= @post.user.company %>
+            <%else%>
+            <%end%> 
+      <%else%>
+      <li> <span class="date">Asked <%= @post.created_at.to_formatted_s(:long) %> <br> Last updated <%= @post.updated_at.to_formatted_s(:long) %> </span></li> 
+            <% if @post.anonymous == false %>
+            By <%= @post.user.name %> of <%= @post.user.company %>
+            <%else%>
+            <%end%> 
+      <%end%>
       <li><span class="category"><%= link_to "#{@post.category.name}", polymorphic_path([@post.category.linkname]) %></span></li>
       <% if @post.user == current_user %>
       <li class="editquestionbutton"><%= link_to "Edit Question", edit_post_path %> </li>
@@ -23,26 +31,17 @@
     </ul>
   </div>
 
+  <% if user_signed_in? && current_user.is_solicitor == true %>
+
   <%= link_to @post do %>
-  <div class="large-3 medium-4 small-12 columns button qnaanswer-button right">
-    <a href="#id_postanswer">Answer</a>
-  </div>
+    <div class="large-3 medium-4 small-12 columns button qnaanswer-button right">
+      <a href="#id_postanswer">Answer</a>
+    </div>
   <%end%>
 
   <%else%>
-  <div class="large-12 medium-12 small-12 columns left">
-    <ul class="inline-list qnainfo left">
-      <li> <span class="date">Asked <%= @post.created_at.to_formatted_s(:long) %></span></li>
-      <li><span class="category"><%= link_to "#{@post.category.name}", polymorphic_path([@post.category.linkname]) %></span></li>
-            <% if @post.user == current_user %>
-      <li class="editquestionbutton"><%= link_to "Edit Question", edit_post_path %> </li>
-      <%end%>
-    </ul>
-  </div>
 
   <%end%>
-
-
 
 </div>
 

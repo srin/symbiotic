@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show, :recent, :search] 
+  before_action :authenticate_user!, except: [:index, :show, :recent, :search, :show_all, :corporate, :ip, :employment, :real_estate, :venture_cap] 
   before_action :correct_user, only: [:edit, :update, :destroy]
   has_scope :recent, :type => :boolean
   has_scope :popular, :type => :boolean
@@ -93,7 +93,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to posts_url, notice: 'Post was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -111,10 +111,7 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :description, :category_id)
+      params.require(:post).permit(:title, :description, :category_id, :anonymous)
     end
-
-
-    
 
 end
