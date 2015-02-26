@@ -30,11 +30,12 @@ Rails.application.routes.draw do
 
   get 'profiles/lawyerprofile' 
 
-  match 'corporate' => 'posts#corporate', via: [:get]
-  match 'ip' => 'posts#ip', via: [:get]
-  match 'employment' => 'posts#employment', via: [:get]
-  match 'realestate' => 'posts#real_estate', via: [:get]
-  match 'venturecapital' => 'posts#venturecapital', via: [:get]
+  match 'posts/corporate' => 'posts#corporate', via: [:get]
+
+  match 'posts/ip' => 'posts#ip', via: [:get]
+  match 'posts/employment' => 'posts#employment', via: [:get]
+  match 'posts/real_estate' => 'posts#real_estate', via: [:get]
+  match 'posts/venture_cap' => 'posts#venturecapital', via: [:get]
 
 
   match 'search' => 'posts#search', via: [:get, :post], as: :search
