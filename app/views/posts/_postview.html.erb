@@ -4,9 +4,9 @@
   <div class="sub-sub-nav">
     <div class="large-12 medium-12 small-12 columns menuitems">
       <ul role="navigation">
-        <li role="menuitem" class="activeitem"> <%= link_to "Most Recent", :recent => true %> </li>
-        <li role="menuitem" class="activeitem"> <%= link_to "Most Popular", :popular => true  %></li>
-        <li role="menuitem" class="activeitem"> <%= link_to "Unanswered", :unanswered => true %></li>
+        <li role="menuitem" class="<%= 'active' if params[:recent] == 'true'%>"> <%= link_to "Most Recent", :recent => true %> </li>
+        <li role="menuitem" class="<%= 'active' if params[:popular] == 'true'%>"> <%= link_to "Most Popular", :popular => true  %></li>
+        <li role="menuitem" class="<%= 'active' if params[:unanswered] == 'true'%>"> <%= link_to "Unanswered", :unanswered => true %></li>
 
       </ul>
     </div>

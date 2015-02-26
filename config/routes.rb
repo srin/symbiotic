@@ -51,5 +51,5 @@ Rails.application.routes.draw do
   end
 end 
 
-  root 'posts#index'
+  root 'posts#show_all'
  end
