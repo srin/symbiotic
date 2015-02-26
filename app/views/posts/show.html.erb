@@ -9,22 +9,29 @@
     <p><%= @post.description %> </p>
   </div>
 
-  <div class="large-6 medium-8 small-12 columns left">
+  <div class="large-9 medium-8 small-12 columns left">
     <ul class="inline-list qnainfo left">
       <% if @post.created_at == @post.updated_at %>
       <li> <span class="date">Asked <%= @post.created_at.to_formatted_s(:long) %> </span></li> 
-          <% if @post.anonymous == false %>
-            By <%= @post.user.name %> of <%= @post.user.company %>
-            <%else%>
-            <%end%> 
+
+
+      <% if @post.anonymous == false %>
+      <li> <img><%= image_tag "missingsmall.png", class: "smallprofileimage"%></img><span class="firstlastname"><%= @post.user.name %>,<span class="companyinfo">  <%= @post.user.company %></span></span></li>
+      <%else%>
+      <%end%> 
+
+        
       <%else%>
       <li> <span class="date">Asked <%= @post.created_at.to_formatted_s(:long) %> <br> Last updated <%= @post.updated_at.to_formatted_s(:long) %> </span></li> 
-            <% if @post.anonymous == false %>
-            By <%= @post.user.name %> of <%= @post.user.company %>
-            <%else%>
-            <%end%> 
+
+      <% if @post.anonymous == false %>
+      <li> <img><%= image_tag "missingsmall.png", class: "smallprofileimage"%></img><span class="firstlastname"><%= @post.user.name %>, <span class="companyinfo">  <%= @post.user.company %></span></span></li>
+      <%else%>
+      <%end%> 
       <%end%>
+
       <li><span class="category"><%= link_to "#{@post.category.name}", polymorphic_path([@post.category.linkname]) %></span></li>
+
       <% if @post.user == current_user %>
       <li class="editquestionbutton"><%= link_to "Edit Question", edit_post_path %> </li>
       <%end%>
@@ -128,6 +135,7 @@
     <br/> <br/> <br/> <br/>
     <div id="id_postanswer" class="row">
       <%= link_to "Sign in / Sign up to post an answer", new_user_session_path, class: "button button-signinsignuptopost" %>
+      <p class="emailnote"> ** Please note that only lawyers are permitted to answer questions</p>
     </div>
     <%end%>
   </div>

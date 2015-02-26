@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   match 'venturecapital' => 'posts#venturecapital', via: [:get]
 
 
-  match 'search' => 'posts#index', via: [:get, :post], as: :search
+  match 'search' => 'posts#search', via: [:get, :post], as: :search
   
 
   devise_for :users

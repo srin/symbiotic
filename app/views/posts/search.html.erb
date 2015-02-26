@@ -1,3 +1,83 @@
 <h1>Search results </h1>
 
-<% render 'postview' %>
+
+  <hr>
+
+
+<% @posts.each do |post| %>      
+
+
+<div class="row questionbox">
+  <div class="large-2 small-12 columns">
+    <div class="large-6 small-6 columns">
+
+      <ul class="answersnumber">
+        <li><%= post.comments_count %></li>
+      </ul>
+
+      <ul class="answerslabel">
+        <li><%= link_to "Answers", post, class: "answerslabel" %> </li>
+      </ul>
+
+    </div>
+    <div class="large-6 small-6 columns">
+
+      <ul class="answersnumber">
+        <li><%= post.tally %></li>
+      </ul>
+
+      <ul class="answerslabel">
+        <li><%= link_to "Upvotes", post, class: "answerslabel" %> </li>
+      </ul>
+
+    </div>
+  </div>
+  
+
+
+
+
+
+
+  <div class="large-9 small-12 columns question">
+    <%= link_to post do %>
+    <p><%= post.title %></p>
+    <%end%>
+    <ul class="inline-list info">
+        <% if post.created_at == post.updated_at %>
+            <li> <span class="date">Asked <%= post.created_at.to_formatted_s(:long) %> </span></li> 
+          <% if post.anonymous == false %>
+            By <%= post.user.name %> of <%= post.user.company %>
+            <%else%>
+            <%end%> 
+        <%else%>
+      <li> <span class="date">Asked <%= post.created_at.to_formatted_s(:long) %> <br> Last updated <%= post.updated_at.to_formatted_s(:long) %> </span></li> 
+            <% if post.anonymous == false %>
+            By <%= post.user.name %> of <%= post.user.company %>
+            <%else%>
+            <%end%> 
+        <%end%>
+      <li><span class="category"><%= link_to "#{post.category.name}", polymorphic_path([post.category.linkname])  %></span></li>
+    </ul>
+  </div>
+
+  <% if user_signed_in? && current_user.is_solicitor == true %>  
+
+  <div class="large-1 small-12 columns  answer-button">
+    <%= link_to "Answer", post, class: "uk-button in-line right" %> 
+  </div>
+
+  <%else%>
+
+  <div class="large-1 small-12 columns  answer-button">
+    <%= link_to "View", post, class: "uk-button in-line right" %> 
+  </div>
+
+  <%end%>
+
+  
+</div>
+
+<%end%>
+
+<%= will_paginate @posts, renderer: BootstrapPagination::Rails %>

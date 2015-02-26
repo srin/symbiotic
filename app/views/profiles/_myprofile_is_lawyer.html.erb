@@ -74,7 +74,7 @@
 
        <ul class="inline-list profileinfo">
         <li> <span class="date">Answered on: <%= comment.created_at.to_formatted_s(:long) %></span></li>
-        <li><span class="category"><%= link_to "#{comment.post.category.name}", posts_path(category: comment.post.category.name) %></span></li>
+        <li><span class="category"><%= link_to "#{comment.post.category.name}", polymorphic_path([comment.post.category.linkname]) %></span></li>
         
       </ul>
     </div>

@@ -11,14 +11,15 @@ class PostsController < ApplicationController
     def index
     
     q = params[:q]
-    @posts = Post.search(description_or_title_or_comments_body_cont: q).result.paginate(:page => params[:page], :per_page => 10)
+    @posts = Post.search(description_or_title_or_comments_body_cont: q).result.order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
      # @posts = @q.result.includes(:comments).order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
     
     end
 
     def search
-    @posts = @q.result.includes(:comments).order("created_at DESC")
-    render :index  
+    q = params[:q]
+    @posts = Post.search(description_or_title_or_comments_body_cont: q).result.order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+    
     end
 
     def show_all

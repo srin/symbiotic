@@ -1,27 +1,21 @@
 
 
 <div class="row">
-<div class="sub-sub-nav">
-  <div class="large-7 medium-6 small-12 columns menuitems">
-  <ul role="navigation">
-  <li role="menuitem" class="activeitem"> <%= link_to "Most Recent", :recent => true %> </li>
-  <li role="menuitem" class="activeitem"> <%= link_to "Most Popular", :popular => true  %></li>
-  <li role="menuitem" class="activeitem"> <%= link_to "Unanswered", :unanswered => true %></li>
+  <div class="sub-sub-nav">
+    <div class="large-12 medium-12 small-12 columns menuitems">
+      <ul role="navigation">
+        <li role="menuitem" class="activeitem"> <%= link_to "Most Recent", :recent => true %> </li>
+        <li role="menuitem" class="activeitem"> <%= link_to "Most Popular", :popular => true  %></li>
+        <li role="menuitem" class="activeitem"> <%= link_to "Unanswered", :unanswered => true %></li>
 
-</ul>
-</div>
-
-
-<div class="large-5 medium-6 small-12 columns searchbar">
-  <div class="right">
-    
-  </div>
+      </ul>
     </div>
 
-<ul>
-  <hr>
-</ul>
-</div>
+
+    <ul>
+      <hr>
+    </ul>
+  </div>
 </div>
 
 
@@ -66,20 +60,24 @@
     <p><%= post.title %></p>
     <%end%>
     <ul class="inline-list info">
-        <% if post.created_at == post.updated_at %>
-            <li> <span class="date">Asked <%= post.created_at.to_formatted_s(:long) %> </span></li> 
-          <% if post.anonymous == false %>
-            By <%= post.user.name %> of <%= post.user.company %>
-            <%else%>
-            <%end%> 
-        <%else%>
+      <% if post.created_at == post.updated_at %>
+      <li> <span class="date">Asked <%= post.created_at.to_formatted_s(:long) %> </span></li> 
+
+      <% if post.anonymous == false %>
+      <li> <img><%= image_tag "missingsmall.png", class: "smallprofileimage"%></img><span class="firstlastname"><%= post.user.name %>, <span class="companyinfo">  <%= post.user.company %></span></span></li>
+      <%else%>
+      <%end%> 
+      <%else%>
       <li> <span class="date">Asked <%= post.created_at.to_formatted_s(:long) %> <br> Last updated <%= post.updated_at.to_formatted_s(:long) %> </span></li> 
-            <% if post.anonymous == false %>
-            By <%= post.user.name %> of <%= post.user.company %>
-            <%else%>
-            <%end%> 
-        <%end%>
-      <li><span class="category"><%= link_to "#{post.category.name}", polymorphic_path([post.category.linkname])  %></span></li>
+
+      <% if post.anonymous == false %>
+      <li> <img><%= image_tag "missingsmall.png", class: "smallprofileimage"%></img><span class="firstlastname"><%= post.user.name %>, <span class="companyinfo">  <%= post.user.company %></span></span></li>
+      <%else%>
+      <%end%> 
+
+
+      <%end%>
+          <li><span class="category"><%= link_to "#{post.category.name}", polymorphic_path([post.category.linkname])  %></span></li>
     </ul>
   </div>
 
