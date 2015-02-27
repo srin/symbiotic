@@ -59,12 +59,16 @@
   </div>
 
   <% @post.comments.each do |comment| %>
+  
+
   <div class="row answerbox">
     <div class="large-1 small-12 columns votesection">
-
+  
+  <% if comment.clarification == false %>
      <ul class="vote">
       <li><%= link_to image_tag("icon_up.png", :border => 0, width: 18), like_post_comment_path(@post, comment), method: :put, class: "uk-button" %> </li>
     </ul>
+
 
     <ul class="votenumber vote">
       <li> <%= comment.get_upvotes.size - comment.get_downvotes.size %></li>
@@ -74,13 +78,27 @@
       <li><%= link_to image_tag("icon_down.png", :border => 0, width: 18), dislike_post_comment_path(@post, comment), method: :put, class: "uk-button" %></li>
     </ul>
 
+    <%else%>
+  <%end%>
+
   </div>
   <div class="large-11 small-12 columns question">
+    <% if comment.clarification == true %>
+    <p><i>Comment / clarification request</i></p>
+    <%else%>
+    <%end%>
     <p><%= simple_format comment.body %> </p>
 
     <ul class="inline-list info">
+    <% if comment.clarification == false %>
       <li> <span class="date">Answered on <%= comment.created_at.to_formatted_s(:long) %></span></li>
+    <%else%>
+      <li> <span class="date">Comment posted on <%= comment.created_at.to_formatted_s(:long) %></span></li>
+    <%end%>
+    <% if comment.clarification == false %>
       <li><span class="upvotesinfo">Upvotes: <%= comment.get_upvotes.size - comment.get_downvotes.size %></span></li>
+
+    
       <li> <img><%= image_tag "missingsmall.png", class: "smallprofileimage"%></img><span class="firstlastname">
       <% if comment.user == current_user %>
       <%= link_to "#{comment.user.name},", profiles_myprofile_path %>  <span class="companyinfo">  <%= comment.user.company %> </span></span></li>
@@ -104,7 +122,8 @@
           <%else%>
           <%end%>
         </ul>
-        
+    <%else%>
+    <%end%>    
 
       </div>
     </div>
@@ -118,10 +137,14 @@
 
  
         <div><%= f.text_area :body%></div>
+
+        <div><%= f.input :clarification, label: "Check the box if requesting further information rather than posting an answer" %></div>
       </div>
    
       <div>
-      <%= f.submit "Post Answer", class: "button button-postanswer" %></div>
+
+      <%= f.submit "Post Comment", class: "button button-postanswer" %>
+    
       <%end%>
 
     </div>

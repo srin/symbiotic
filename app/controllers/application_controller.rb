@@ -18,20 +18,20 @@ class ApplicationController < ActionController::Base
         request.path != "/users/sign_out" &&
         !request.xhr?) # don't store ajax calls
       session[:previous_url] = request.fullpath 
+      end
     end
-  end
 
-  def after_sign_in_path_for(resource)
+    def after_sign_in_path_for(resource)
     session[:previous_url] || root_path
-  end
+    end
 
-  def after_sign_out_path_for(resource_or_scope)
-  request.referrer
-  end
+    def after_sign_out_path_for(resource_or_scope)
+    request.referrer
+    end
 
-protected
+  protected
 
- def configure_permitted_parameters
+  def configure_permitted_parameters
    devise_parameter_sanitizer.for(:sign_in) << :name
    devise_parameter_sanitizer.for(:sign_up) << :name
    devise_parameter_sanitizer.for(:account_update) << :name
@@ -50,6 +50,7 @@ protected
    devise_parameter_sanitizer.for(:sign_in) << :image
    devise_parameter_sanitizer.for(:sign_up) << :image
    devise_parameter_sanitizer.for(:account_update) << :image
+
  end
 
   
