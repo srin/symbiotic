@@ -18,6 +18,11 @@
   </div>
 </div>
 
+<% if @posts.count == 0 %>
+
+<h3>No questions yet! <br><br> <%= link_to "Ask a question!", new_post_path, class: "button" %>
+
+<%else%>
 
 
 <% @posts.each do |post| %>      
@@ -101,3 +106,4 @@
 <%end%>
 
 <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
+<%end%>

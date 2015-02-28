@@ -20,7 +20,7 @@
       <%else%>
       <%end%> 
 
-        
+
       <%else%>
       <li> <span class="date">Asked <%= @post.created_at.to_formatted_s(:long) %> <br> Last updated <%= @post.updated_at.to_formatted_s(:long) %> </span></li> 
 
@@ -30,7 +30,7 @@
       <%end%> 
       <%end%>
 
-      <li><span class="category"><%= link_to "#{@post.category.name}", polymorphic_path([@post.category.linkname]) %></span></li>
+
 
       <% if @post.user == current_user %>
       <li class="editquestionbutton"><%= link_to "Edit Question", edit_post_path %> </li>
@@ -41,9 +41,9 @@
   <% if user_signed_in? && current_user.is_solicitor == true %>
 
   <%= link_to @post do %>
-    <div class="large-3 medium-4 small-12 columns button qnaanswer-button right">
-      <a href="#id_postanswer">Answer</a>
-    </div>
+  <div class="large-3 medium-4 small-12 columns button qnaanswer-button right">
+    <a href="#id_postanswer">Answer</a>
+  </div>
   <%end%>
 
   <%else%>
@@ -54,8 +54,8 @@
 
 
 <div class="row answertitle">
-  <div class="large-12 small-12 columns ">
-    <h5><%=pluralize(@post.comments_count, "Answer") %> </h5></div>
+  <div class="large-12 small-12 columns" style="margin-left: -12px;">
+    <h5><%=pluralize(@post.comments_count, "Answer / Clarification Request") %> </h5></div>
   </div>
 
   <% @post.comments.each do |comment| %>
@@ -63,104 +63,105 @@
 
   <div class="row answerbox">
     <div class="large-1 small-12 columns votesection">
-  
-  <% if comment.clarification == false %>
-     <ul class="vote">
-      <li><%= link_to image_tag("icon_up.png", :border => 0, width: 18), like_post_comment_path(@post, comment), method: :put, class: "uk-button" %> </li>
-    </ul>
+
+      <% if comment.clarification == false %>
+      <ul class="vote">
+        <li><%= link_to image_tag("icon_up.png", :border => 0, width: 18), like_post_comment_path(@post, comment), method: :put, class: "uk-button" %> </li>
+      </ul>
 
 
-    <ul class="votenumber vote">
-      <li> <%= comment.get_upvotes.size - comment.get_downvotes.size %></li>
-    </ul>
+      <ul class="votenumber vote">
+        <li> <%= comment.get_upvotes.size - comment.get_downvotes.size %></li>
+      </ul>
 
-    <ul class="vote">
-      <li><%= link_to image_tag("icon_down.png", :border => 0, width: 18), dislike_post_comment_path(@post, comment), method: :put, class: "uk-button" %></li>
-    </ul>
+      <ul class="vote">
+        <li><%= link_to image_tag("icon_down.png", :border => 0, width: 18), dislike_post_comment_path(@post, comment), method: :put, class: "uk-button" %></li>
+      </ul>
 
-    <%else%>
-  <%end%>
-
-  </div>
-  <div class="large-11 small-12 columns question">
-    <% if comment.clarification == true %>
-    <p><i>Comment / clarification request</i></p>
-    <%else%>
-    <%end%>
-    <p><%= simple_format comment.body %> </p>
-
-    <ul class="inline-list info">
-    <% if comment.clarification == false %>
-      <li> <span class="date">Answered on <%= comment.created_at.to_formatted_s(:long) %></span></li>
-    <%else%>
-      <li> <span class="date">Comment posted on <%= comment.created_at.to_formatted_s(:long) %></span></li>
-    <%end%>
-    <% if comment.clarification == false %>
-      <li><span class="upvotesinfo">Upvotes: <%= comment.get_upvotes.size - comment.get_downvotes.size %></span></li>
-
-    
-      <li> <img><%= image_tag "missingsmall.png", class: "smallprofileimage"%></img><span class="firstlastname">
-      <% if comment.user == current_user %>
-      <%= link_to "#{comment.user.name},", profiles_myprofile_path %>  <span class="companyinfo">  <%= comment.user.company %> </span></span></li>
       <%else%>
-      <%= link_to "#{comment.user.name},", profiles_lawyerprofile_path(user: comment.user.id)%>  <span class="companyinfo">  <%= comment.user.company %> </span></span></li>
       <%end%>
 
-      
-<li> <span class="userscorelabel"> User Score: <%= comment.user.karma %></span></li>
-      <li>
-        <% if comment.user.verified == true %> 
-        <span class="verifiedsolicitor">
-          <%= "Verified solicitor"%></span>
-          <%else%>
-          <span class="pendingverification">
-            <%= "Solicitor verification pending" %><span>
-          </li>
-          <%end%>
+    </div>
+    <div class="large-11 small-12 columns question">
+      <% if comment.clarification == true %>
+      <span class="clarificationlabel">Clarification Request</span>
+      <%else%>
+      <%end%>
+      <p><%= simple_format comment.body %> </p>
+
+      <ul class="inline-list info">
+        <% if comment.clarification == false %>
+        <li> <span class="date">Answered on <%= comment.created_at.to_formatted_s(:long) %></span></li>
+        <%else%>
+        <li> <span class="date">Comment posted on <%= comment.created_at.to_formatted_s(:long) %></span></li>
+        <%end%>
+        <% if comment.clarification == false %>
+        <li><span class="upvotesinfo">Upvotes: <%= comment.get_upvotes.size - comment.get_downvotes.size %></span></li>
+
+
+        <li> <img><%= image_tag "missingsmall.png", class: "smallprofileimage"%></img><span class="firstlastname">
           <% if comment.user == current_user %>
-          <li class="deleteanswer"><span> <%= link_to 'Delete Answer', post_comment_path(@post, comment), method: :delete %> </span> </li>
+          <%= link_to "#{comment.user.name},", profiles_myprofile_path %>  <span class="companyinfo">  <%= comment.user.company %> </span></span></li>
           <%else%>
+          <%= link_to "#{comment.user.name},", profiles_lawyerprofile_path(user: comment.user.id)%>  <span class="companyinfo">  <%= comment.user.company %> </span></span></li>
           <%end%>
-        </ul>
-    <%else%>
-    <%end%>    
+
+
+          <li> <span class="userscorelabel"> User Score: <%= comment.user.karma %></span></li>
+          <li>
+            <% if comment.user.verified == true %> 
+            <span class="verifiedsolicitor">
+              <%= "Verified solicitor"%></span>
+              <%else%>
+              <span class="pendingverification">
+                <%= "Solicitor verification pending" %><span>
+              </li>
+              <%end%>
+              <% if comment.user == current_user %>
+              <li class="deleteanswer"><span> <%= link_to 'Delete Answer', post_comment_path(@post, comment), method: :delete %> </span> </li>
+              <%else%>
+              <%end%>
+            </ul>
+            <%else%>
+            <%end%>    
+
+          </div>
+        </div>
+        <%end%>
+
+        <% if user_signed_in? && current_user.is_solicitor == true %>
+        <%= simple_form_for [@post, Comment.new]  do |f| %>
+        <div id="id_postanswer" class="row answerquestionform">
+          <div class="large-12 small-12 columns">
+            <div><h3>Share an answer </h3></div>
+
+
+            <div><%= f.text_area :body%></div>
+
+          </br>
+          <div><%= f.input :clarification, label: " I am requesting further information rather than answering this question." %></div></br>
+        </div>
+
+        <div>
+
+        <%= f.submit "Post", class: "button button-postanswer" %>
+
+        <%end%>
 
       </div>
-    </div>
-    <%end%>
 
-    <% if user_signed_in? && current_user.is_solicitor == true %>
-    <%= simple_form_for [@post, Comment.new]  do |f| %>
-    <div id="id_postanswer" class="row answerquestionform">
-      <div class="large-12 small-12 columns">
-        <div><h3>Share an answer </h3></div>
+      <%elsif user_signed_in? && current_user.is_solicitor == false%>
+      <br/>
+      <br/>
 
- 
-        <div><%= f.text_area :body%></div>
+      <%else%>  
 
-        <div><%= f.input :clarification, label: "Check the box if requesting further information rather than posting an answer" %></div>
+      <br/> <br/> <br/> <br/>
+      <div id="id_postanswer" class="row">
+        <%= link_to "Sign in / Sign up to post an answer", new_user_session_path, class: "button button-signinsignuptopost" %>
+        <p class="emailnote"> ** Please note that only lawyers are permitted to answer questions</p>
       </div>
-   
-      <div>
-
-      <%= f.submit "Post Comment", class: "button button-postanswer" %>
-    
       <%end%>
-
     </div>
-
-    <%elsif user_signed_in? && current_user.is_solicitor == false%>
-    <br/>
-    <br/>
-
-    <%else%>  
-
-    <br/> <br/> <br/> <br/>
-    <div id="id_postanswer" class="row">
-      <%= link_to "Sign in / Sign up to post an answer", new_user_session_path, class: "button button-signinsignuptopost" %>
-      <p class="emailnote"> ** Please note that only lawyers are permitted to answer questions</p>
-    </div>
-    <%end%>
-  </div>
 
 

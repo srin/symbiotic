@@ -15,6 +15,7 @@ gem 'figaro', '~> 1.1.0'
 gem 'has_scope', '~> 0.6.0'
 gem 'will_paginate', '~> 3.0.7'
 gem 'will_paginate-bootstrap'
+gem 'activeadmin', '~> 0.6.6'
 
 group :development, :test do
      gem 'sqlite3'
