@@ -31,4 +31,33 @@
 
     <%= javascript_include_tag "application" %>
   </body>
+
+  <div id="sticky_footer">
+
+  <footer>
+    <div class="large-12 medium-12 small-12 columns subbottombar">
+
+      <ul class="large-5 medium-6 small-12 columns inline-list left" style="padding-left:20px;">
+        <li><%= link_to "About", static_pages_about_path %> </li>
+        <li><%= link_to "FAQ", static_pages_faq_path %></li>
+        <li><%= link_to "Privacy Policy", static_pages_privacy_path %></li>
+        <li><%= link_to "Terms", static_pages_terms_path %></li>
+      </ul>
+      
+      <div class="large-3 medium-4 small-12 columns" style="padding-right:20px; padding-bottom: 0px; margin-bottom: 0px;">
+        <ul class="inline-list right">
+          <li><a href="#">Contact:  symbiotic@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </hr>
+  <div class="large-12 medium-12 small-12 columns text-center bottombar">
+    <p>Symbiotic © 2015 All Rights Reserved.</p>
+  </div>
+
+</footer>
+</div>
+
+
 </html>
