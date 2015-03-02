@@ -10,100 +10,114 @@
 
       </ul>
     </div>
-
-
     <ul>
       <hr>
     </ul>
+
   </div>
-</div>
 
-<% if @posts.count == 0 %>
+  <% if @posts.count == 0 %>
 
-<h3>No questions yet! <br><br> <%= link_to "Ask a question!", new_post_path, class: "button" %>
+  <p class="emailnote" style="margin-top: 40px;">No questions yet, be the first to ask! </p>
 
-<%else%>
+   <ul class="button-firstaskquestion left">
+  <%= link_to "Ask a Question!", new_post_path%>
+  </ul>
 
+    <%else%>
 
-<% @posts.each do |post| %>      
-
-
-<div class="row questionbox">
-  <div class="large-2 small-12 columns">
-    <div class="large-6 small-6 columns">
-
-      <ul class="answersnumber">
-        <li><%= post.comments_count %></li>
-      </ul>
-
-      <ul class="answerslabel">
-        <li><%= link_to "Answers", post, class: "answerslabel" %> </li>
-      </ul>
-
-    </div>
-    <div class="large-6 small-6 columns">
-
-      <ul class="answersnumber">
-        <li><%= post.tally %></li>
-      </ul>
-
-      <ul class="answerslabel">
-        <li><%= link_to "Upvotes", post, class: "answerslabel" %> </li>
-      </ul>
-
-    </div>
   </div>
-  
 
 
 
 
+  <% @posts.each do |post| %>      
 
 
-  <div class="large-9 small-12 columns question">
-    <%= link_to post do %>
-    <p><%= post.title %></p>
-    <%end%>
-    <ul class="inline-list info">
-      <% if post.created_at == post.updated_at %>
-      <li> <span class="date">Asked <%= post.created_at.to_formatted_s(:long) %> </span></li> 
+  <div class="row questionbox">
+    <div class="large-2 small-12 columns">
+      <div class="large-6 small-6 columns">
 
-      <% if post.anonymous == false %>
-      <li> <img><%= image_tag "missingsmall.png", class: "smallprofileimage"%></img><span class="firstlastname"><%= post.user.name %>, <span class="companyinfo">  <%= post.user.company %></span></span></li>
-      <%else%>
-      <%end%> 
-      <%else%>
-      <li> <span class="date">Asked <%= post.created_at.to_formatted_s(:long) %> <br> Last updated <%= post.updated_at.to_formatted_s(:long) %> </span></li> 
+        <ul class="answersnumber">
+          <li><%= post.comments_count %></li>
+        </ul>
 
-      <% if post.anonymous == false %>
-      <li> <img><%= image_tag "missingsmall.png", class: "smallprofileimage"%></img><span class="firstlastname"><%= post.user.name %>, <span class="companyinfo">  <%= post.user.company %></span></span></li>
-      <%else%>
-      <%end%> 
+        <ul class="answerslabel">
+          <li><%= link_to "Answers", post, class: "answerslabel" %> </li>
+        </ul>
+
+      </div>
+      <div class="large-6 small-6 columns">
+
+        <ul class="answersnumber">
+          <li><%= post.tally %></li>
+        </ul>
+
+        <ul class="answerslabel">
+          <li><%= link_to "Upvotes", post, class: "answerslabel" %> </li>
+        </ul>
+
+      </div>
+    </div>
 
 
+    <div class="large-9 small-12 columns question">
+      <%= link_to post do %>
+      <p><%= post.title %></p>
       <%end%>
-          <li><span class="category"><%= link_to "#{post.category.name}", polymorphic_path([post.category.linkname])  %></span></li>
-    </ul>
-  </div>
+      <ul class="inline-list info">
+        <% if post.created_at == post.updated_at %>
+        <li> <span class="date">Asked <%= post.created_at.to_formatted_s(:long) %> </span></li> 
 
-  <% if user_signed_in? && current_user.is_solicitor == true %>  
+        <% if post.anonymous == false %>
+        <li> <%= image_tag "missingsmall.png", class: "smallprofileimage"%><span class="firstlastname"><%= post.user.name %>, <span class="companyinfo">  <%= post.user.company %></span></span></li>
+        <%else%>
+        <li> <%= image_tag "missingsmall.png", class: "smallprofileimage"%><span class="firstlastname"><%="Anonymous"%><span class="companyinfo"></li>
+        <%end%> 
+        <%else%>
+        <li> <span class="date">Asked <%= post.created_at.to_formatted_s(:long) %> <br> Last updated <%= post.updated_at.to_formatted_s(:long) %> </span></li> 
 
-  <div class="large-1 small-12 columns  answer-button">
-    <%= link_to "Answer", post, class: "uk-button in-line right" %> 
-  </div>
+        <% if post.anonymous == false %>
+        <li> <%= image_tag "missingsmall.png", class: "smallprofileimage"%><span class="firstlastname"><%= post.user.name %>, <span class="companyinfo">  <%= post.user.company %></span></span></li>
+        <%else%>
 
-  <%else%>
+        <li> <%= image_tag "missingsmall.png", class: "smallprofileimage"%><span class="firstlastname"><%="Anonymous"%><span class="companyinfo"></li>
+        <%end%> 
 
-  <div class="large-1 small-12 columns  answer-button">
-    <%= link_to "View", post, class: "uk-button in-line right" %> 
+
+        <%end%>
+        <li><span class="category"><%= link_to "#{post.category.name}", polymorphic_path([post.category.linkname])  %></span></li>        
+      </ul>
+    </div>
+
+    <% if user_signed_in? && current_user.is_solicitor == true %>  
+
+    <div class="large-1 small-12 columns  answer-button">
+      <%= link_to "Answer", post, class: "uk-button in-line right" %> 
+    </div>
+
+    <%else%>
+
+    <div class="large-1 small-12 columns  answer-button">
+      <%= link_to "View", post, class: "uk-button in-line right" %> 
+    </div>
+
+    <%end%>
+
+
   </div>
 
   <%end%>
 
-  
-</div>
-
-<%end%>
-
-<%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
-<%end%>
+  <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
+  <%end%>
+     <br>
+    <br>
+    <br>
+    <br>
+    <br>
+       <br>
+    <br>
+    <br>
+    <br>
+    <br>

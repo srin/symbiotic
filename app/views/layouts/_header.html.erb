@@ -15,12 +15,12 @@
       <li>
          <p class="icon_search_background"> sfsdf</p>
       </li>
+
       <li class="icon_search">
-        <img><%= image_tag "icon_search.png", class: "icon_search"%></img> 
+        <%= image_tag "icon_search.png", class: "icon_search"%> 
       </li>
 
     
-
       <li class="search3">
         <%= form_tag search_path method: :get do %>
           <%= search_field_tag :q, nil, :placeholder => "Search", class: "search3" %>
@@ -66,7 +66,7 @@
          <p class="icon_search_background"> sfsdf</p>
       </li>
       <li class="icon_search">
-        <img><%= image_tag "icon_search.png", class: "icon_search"%></img> 
+        <%= image_tag "icon_search.png", class: "icon_search"%>
       </li>
 
     
@@ -167,7 +167,7 @@
  </ul>
  
  
- <ul class="large-2 medium-3 small-6 columns button-askquestion sub-nav-medium-askquestion right">
+ <ul class="large-2 medium-3 small-6 columns sub-nav-medium-askquestion button-askquestion right">
   <%= link_to "Ask a Question", new_post_path%>
 </ul>
 
@@ -190,8 +190,8 @@
    </ul>
  </div>
 
- <div class="small-6 columns sub-nav-small-askquestion right">
-   <ul>
+ <div class="small-6 columns right">
+   <ul class="sub-nav-small-askquestion">
     <%= link_to "Ask a Question", new_post_path%>
   </ul>
 </div>
@@ -202,32 +202,5 @@
 
 
 
-</div>
-
-<div id="sticky_footer">
-
-  <footer>
-    <div class="large-12 medium-12 small-12 columns subbottombar">
-
-      <ul class="large-5 medium-6 small-12 columns inline-list left" style="padding-left:20px;">
-        <li><%= link_to "About", static_pages_about_path %> </li>
-        <li><%= link_to "FAQ", static_pages_faq_path %></li>
-        <li><%= link_to "Privacy Policy", static_pages_privacy_path %></li>
-        <li><%= link_to "Terms", static_pages_terms_path %></li>
-      </ul>
-      
-      <div class="large-3 medium-4 small-12 columns" style="padding-right:20px; padding-bottom: 0px; margin-bottom: 0px;">
-        <ul class="inline-list right">
-          <li><a href="#">Contact:  symbiotic@gmail.com</a></li>
-        </ul>
-      </div>
-    </div>
-
-  </hr>
-  <div class="large-12 medium-12 small-12 columns text-center bottombar">
-    <p>Symbiotic © 2015 All Rights Reserved.</p>
-  </div>
-
-</footer>
 </div>
 

@@ -5,12 +5,12 @@ class ProfilesController < ApplicationController
   def myprofile
 
   	@user = current_user
-  	@posts = @user.posts.paginate(:page => params[:page], :per_page => 10)
-  	@comments = @user.comments.paginate(:page => params[:page], :per_page => 10)
+  	@posts = @user.posts.order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+  	@comments = @user.comments.order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
   end
 
   def lawyerprofile
-  	@comments = @user.comments.paginate(:page => params[:page], :per_page => 10)
+  	@comments = @user.comments.order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
   end
 
 

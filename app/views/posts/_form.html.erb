@@ -4,8 +4,7 @@
   <%= form_for(@post) do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> prevent this question from being posted. Please take a look at these errors and try again.</h2>
-
+      <p>These <%= pluralize(@post.errors.count, "error") %> prevented this question from being posted. Please try again! Thanks!</p>
       <ul>
       <% @post.errors.full_messages.each do |message| %>
         <li><%= message %></li>

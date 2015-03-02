@@ -18,7 +18,7 @@ class PostsController < ApplicationController
 
     def search
     q = params[:q]
-    @posts = Post.search(description_or_title_or_comments_body_cont: q).result.order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+    @posts = Post.search(description_or_title_or_comments_body_cont: q).result.order("created_at DESC").to_a.uniq
     
     end
 
