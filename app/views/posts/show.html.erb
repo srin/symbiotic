@@ -139,8 +139,8 @@
             <div><%= f.text_area :body%></div>
 
           </br>
-          <div><%= f.input :clarification, label: " I am requesting further information rather than answering this question." %></div></br>
-        </div>
+          <div><%= f.input :clarification, label: "  I am requesting further information rather than answering this question." %></div></br>
+          </div>
 
         <div>
 
@@ -150,11 +150,34 @@
 
       </div>
 
+      <%elsif user_signed_in? && current_user.is_solicitor == false && current_user == @post.user%>
+
+        <%= simple_form_for [@post, Comment.new]  do |f| %>
+        <div id="id_postanswer" class="row answerquestionform">
+          <div class="large-12 small-12 columns">
+            <div><h3>Share a comment </h3></div>
+
+
+            <div><%= f.text_area :body, :placeholder => "Share any clarifications or provide additional information to your original question"%></div>
+
+          </br>
+          <div id="hidden"><%= f.input :clarification,  :input_html => {:checked => true} %></div></br>
+          </div>
+
+        <div>
+
+        <%= f.submit "Post", class: "button button-postanswer" %>
+
+        <%end%>
+
       <%elsif user_signed_in? && current_user.is_solicitor == false%>
       <br/>
       <br/>
 
+
+
       <%else%>  
+
 
       <br/> <br/> <br/> <br/>
       <div id="id_postanswer" class="row">
