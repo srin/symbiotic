@@ -9,6 +9,8 @@ class Post < ActiveRecord::Base
 	scope :category, -> category_id {where(:category_id => category_id)}
 
 	scope :category_and_recent, -> {category.order("created_at DESC")}
+
+	validates :title, :description, :category_id, :presence => true
 	
 
 	def increase_tally(count=1)
