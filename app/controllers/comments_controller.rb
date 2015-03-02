@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comments, only: [:destroy]
-  before_action :authenticate_user!, except: [:index, :show] 
+  before_action :authenticate_user!, except: [:index] 
   before_action :correct_user, only: [:edit, :update, :destroy]
 
 
@@ -44,13 +44,15 @@ class CommentsController < ApplicationController
       @post = Post.find(params[:post_id])
       @comment = @post.comments.find(params[:id])
       if current_user.voted_for? @comment
+        flash[:notice] = "You cannot vote more than once"
       
       else
       @comment.upvote_by current_user 
       @comment.user.increase_karma
       @comment.post.increase_tally
-      end
       flash[:success] = "You've upvoted"
+      end
+      
       redirect_to @post       
     end
 
@@ -58,12 +60,13 @@ class CommentsController < ApplicationController
       @post = Post.find(params[:post_id])
       @comment = @post.comments.find(params[:id])
       if current_user.voted_for? @comment
-      
+      flash[:notice] = "You cannot vote more than once"
       else
       @comment.downvote_by current_user
       @comment.user.decrease_karma
-    end
       flash[:success] = "You've downvoted"
+    end
+      
       redirect_to @post     
       
     end

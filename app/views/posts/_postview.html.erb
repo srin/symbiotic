@@ -16,15 +16,21 @@
 
   </div>
 
-  <% if @posts.count == 0 %>
+  <% if @posts.count == 0 && params[:unanswered] != 'true' %>
 
-  <p class="emailnote" style="margin-top: 40px;">No questions yet, be the first to ask! </p>
+    <p class="emailnote" style="margin-top: 40px;">No questions yet, be the first to ask! </p>
 
-   <ul class="button-firstaskquestion left">
-  <%= link_to "Ask a Question!", new_post_path%>
-  </ul>
+     <ul class="button-firstaskquestion left">
+    <%= link_to "Ask a Question!", new_post_path%>
+    </ul>
 
-    <%else%>
+  <% elsif @posts.count == 0 && params[:unanswered] == 'true' %>
+
+  <p class="emailnote" style="margin-top: 40px;">There are no unanswered questions</p>
+
+
+  <%else%>
+    
 
   </div>
 
