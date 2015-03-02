@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   match 'posts/ip' => 'posts#ip', via: [:get]
   match 'posts/employment' => 'posts#employment', via: [:get]
   match 'posts/real_estate' => 'posts#real_estate', via: [:get]
-  match 'posts/venture_cap' => 'posts#venturecapital', via: [:get]
+  match 'posts/venture_cap' => 'posts#venturecap', via: [:get]
 
 
   match 'search' => 'posts#search', via: [:get, :post], as: :search
