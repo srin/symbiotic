@@ -11,9 +11,7 @@ class Post < ActiveRecord::Base
 	scope :category_and_recent, -> {category.order("created_at DESC")}
 
 	validates :title, :description, :category_id, presence: true
-	validates :terms_of_service, acceptance: true, allow_nil: false
-
-	
+	validates :terms, inclusion: { in: [true], message: "and conditions must be accepted" }
 
 	def increase_tally(count=1)
     	update_attribute(:tally, tally + count)
