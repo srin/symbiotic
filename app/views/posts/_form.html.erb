@@ -4,7 +4,7 @@
   <%= form_for(@post) do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
-      <p>These <%= pluralize(@post.errors.count, "error") %> prevented this question from being posted. Please try again! Thanks!</p>
+      <p><%= pluralize(@post.errors.count, "error") %> prevented this question from being posted. Please try again! Thanks!</p>
       <ul>
       <% @post.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -44,7 +44,16 @@
     <div class="row askquestionform">
       <div class="large-12 small-12 columns ">
         <%= f.check_box :anonymous %> 
-        <%= f.label :anonymous, " I would like to ask this question anonymously." %> 
+        <%= f.label :anonymous, "I would like to ask this question anonymously." %> 
+      </div>
+    </div>  
+  </br>
+  
+    </br>
+    <div class="row askquestionform">
+      <div class="large-12 small-12 columns ">
+        <%= f.check_box :terms_of_service %> 
+        <%= f.label :terms_of_service, ("I agree to the #{link_to 'Lawreo terms and conditions.', static_pages_terms_path}").html_safe %> 
       </div>
     </div>  
   </br>
@@ -52,9 +61,9 @@
     <div class="actions">
       <%= f.submit "Post Question", class: "button button-postquestion" %> 
     </div>
-
+<p class="emailnote"> DISCLAIMER: Receiving an answer to your question does not constitute specific legal advice to be relied upon. You are always advised to seek independent legal advice</p> 
   
-<% end %>
+<%end%>
 </div>
 </div>
 

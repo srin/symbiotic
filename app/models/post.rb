@@ -10,7 +10,9 @@ class Post < ActiveRecord::Base
 
 	scope :category_and_recent, -> {category.order("created_at DESC")}
 
-	validates :title, :description, :category_id, :presence => true
+	validates :title, :description, :category_id, presence: true
+	validates :terms_of_service, acceptance: true, allow_nil: false
+
 	
 
 	def increase_tally(count=1)
